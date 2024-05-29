@@ -8,9 +8,6 @@ export default defineConfig(() => {
     plugins: [react(), svgr()],
     resolve: {
       alias: [
-        { find: 'data', replacement: path.resolve(__dirname, 'src/data') },
-        { find: 'domain', replacement: path.resolve(__dirname, 'src/domain') },
-        { find: 'infra', replacement: path.resolve(__dirname, 'src/infra') },
         { find: 'main', replacement: path.resolve(__dirname, 'src/main') },
         {
           find: 'presentation',
