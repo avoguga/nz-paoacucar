@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: 0;
-        box-sizing: inherit;
+        box-sizing: border-box;
         font-family: inherit;
     }
 
@@ -17,29 +17,14 @@ export const GlobalStyles = createGlobalStyle`
         }
 
         ::-webkit-scrollbar-track {
-            background: ${sg.colors.neutralColors.colorNeutralSoft};
-            border-radius: ${sg.borders.borderRadius.borderRadiusPill};
+            /* background: ${sg.colors.neutralColors.colorNeutralSoft};
+            border-radius: ${sg.borders.borderRadius.borderRadiusPill}; */
         }
 
         ::-webkit-scrollbar-thumb {
-            background: ${sg.colors.neutralColors.colorNeutralClean};
-            border-radius: ${sg.borders.borderRadius.borderRadiusPill};
+            /* background: ${sg.colors.neutralColors.colorNeutralClean};
+            border-radius: ${sg.borders.borderRadius.borderRadiusPill}; */
         }
-    }
-
-    html{
-        font-size: 62.5%; //10px
-    }
-
-    body {
-        font-family: ${sg.fonts.fontFamily.fontFamilyPrimary};
-        font-weight: ${sg.fonts.fontWeight.fontWeightRegular};
-        line-height: ${sg.fonts.lineHeight.lineHeightMd(
-          sg.fonts.fontSize.fontSizeBodyMd
-        )};
-        position: relative;
-        background-color: ${sg.colors.backgroundColors.colorBackgroundSnow};
-        box-sizing: border-box;
     }
 
     html, body, #root {
