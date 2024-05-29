@@ -1,0 +1,221 @@
+{
+  "Create component by defining the name ": {
+    "scope": "typescriptreact",
+    "prefix": "rc-name",
+    "body": [
+      "export interface ${1:$TM_FILENAME_BASE}ElementProps {}",
+      "",
+      "interface ${1:$TM_FILENAME_BASE}Props extends ${1:$TM_FILENAME_BASE}ElementProps {} ",
+      "",
+      "const ${1:$TM_FILENAME_BASE} = ({}: ${1:$TM_FILENAME_BASE}Props) => {",
+      "\treturn <p>Olá Mundo</p>;",
+      "};",
+      "",
+      "export default ${1:$TM_FILENAME_BASE};",
+      ""
+    ],
+    "description": "Creates a new React component with TypeScript"
+  },
+
+  "Create component with folder name ": {
+    "scope": "typescriptreact",
+    "prefix": "rc-folder",
+    "body": [
+      "export interface ${TM_DIRECTORY/.*\\\\(.*)/$1/}ElementProps {}",
+      "",
+      "interface ${TM_DIRECTORY/.*\\\\(.*)/$1/}Props extends ${TM_DIRECTORY/.*\\\\(.*)/$1/}ElementProps {} ",
+      "",
+      "const ${TM_DIRECTORY/.*\\\\(.*)/$1/} = ({}: ${TM_DIRECTORY/.*\\\\(.*)/$1/}Props) => {",
+      "\treturn <p>Olá Mundo</p>;",
+      "};",
+      "",
+      "export default ${TM_DIRECTORY/.*\\\\(.*)/$1/};",
+      ""
+    ],
+    "description": "Creates a new React component with TypeScript"
+  },
+
+  "Create Test ": {
+    "scope": "typescriptreact",
+    "prefix": "rc-test",
+    "body": [
+      "import '@testing-library/jest-dom';",
+      "",
+      "describe('Name Component', () => {",
+      "\tit('should...', () => {});",
+      "});",
+      ""
+    ],
+    "description": "Creates a new test component with TypeScript"
+  },
+
+  "Create Test with MSW ": {
+    "scope": "typescriptreact",
+    "prefix": "rc-test-msw",
+    "body": [
+      "import '@testing-library/jest-dom';",
+      "import { rest } from 'msw';",
+      "import { setupServer } from 'msw/node';",
+      "",
+      "const handler = [",
+      "\trest.${1:$METHOD}('http://localhost/${2:$ENDPOINT}', (req, res, ctx) => {",
+      "\t\treturn res(ctx.status(200), ctx.json(${3:$MOCK}));",
+      "\t}),",
+      "];",
+      "",
+      "describe('Name Component', () => {",
+      "\tconst server = setupServer(...handler);",
+      "\tbeforeAll(() => {",
+      "\t\tserver.listen();",
+      "\t});",
+      "\tbeforeEach(() => {",
+      "\t\t//render(<COMPONENT />);",
+      "\t});",
+      "\tafterEach(() => server.resetHandlers());",
+      "\tafterAll(() => server.close());",
+      "",
+      "\tit('should...', () => {});",
+      "});",
+      ""
+    ],
+    "description": "Creates a new test component with MSW and TypeScript"
+  },
+
+  "Create Context ": {
+    "scope": "typescriptreact",
+    "prefix": "rc-context",
+    "body": [
+      "import { createContext, useContext, useMemo } from 'react';",
+      "",
+      "type ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}ContextProps = {};",
+      "",
+      "type ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}ProviderProps = {",
+      "\tchildren: React.ReactNode;",
+      "};",
+      "",
+      "const ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}Context = createContext<${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}ContextProps>({} as ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}ContextProps);",
+      "",
+      "export const ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}Provider = ({ children }: ${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}ProviderProps) => {",
+      "\tconst contextValue = useMemo(",
+      "\t\t() => ({"
+      "\t\t\t//COLOQUE AQUI OS ESTADOS QUE SERÃO EXPORTADOS",
+      "\t\t}),",
+      "\t\t[",
+      "\t\t\t//COLOQUE AQUI OS ESTADOS QUE SERVIRÃO COMO GATILHO PARA ATUALIZAÇÃO DOS ESTADOS",
+      "\t\t]"
+      "\t);"
+      "",
+      "\treturn (",
+      "\t\t<${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}Context.Provider value={contextValue}>",
+      "\t\t\t{children}",
+      "\t\t</${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}Context.Provider>",
+      "\t);",
+      "};",
+      "",
+      "export const use${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}} = () => {",
+      "\tconst context = useContext(${1:${TM_DIRECTORY/(.*\\\\)?([^\\\\]*)\\\\?/${2:/capitalize}/}}Context);",
+      "",
+      "\tif (!context) {",
+      "\t\tthrow new Error('You just cannot access this context inside a provider');",
+      "\t}",
+      "",
+      "\treturn context;",
+      "};",
+      ""
+    ],
+    "description": "Creates a new context component with TypeScript"
+  },
+
+  "Create Remote UseCase With Imports ": {
+    "scope": "typescript",
+    "prefix": "remote-i",
+    "body": [
+      "import { HttpClient } from 'data/protocols/http/http-client';",
+      "import { handleHttpResponse } from 'domain/errors/handle-http-response';",
+      "import { LocalStorageAdapter } from 'infra/cache/local-storage-adapter';",
+      "",
+      "export class ${1:$TM_FILENAME_BASE} implements ${2:$INTERFACE} {",
+      "\tconstructor(",
+      "\t\tprivate readonly endPoint: string,",
+      "\t\tprivate readonly httpClient: HttpClient<${3:$MODEL}>",
+      "\t) {}",
+      "",
+      "\tasync ${4:$FUNCTIONNAME}(): Promise<${3:$MODEL}> {",
+      "\t\tconst httpResponse = await this.httpClient.request({",
+      "\t\t\turl: `${this.endPoint}`,",
+      "\t\t\tmethod: '${5:$method}', //'get' | 'post' | 'put' | 'delete'",
+      "\t\t\t headers: {",
+      "\t\t\t\tauthorization: `Bearer ${new LocalStorageAdapter().get('token')}`,",
+      "\t\t\t},",
+      "\t\t});",
+      "",
+      "\t\treturn handleHttpResponse(httpResponse);",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "Create structure Remote UseCase with imports"
+  },
+
+  "Create Remote UseCase Without Imports ": {
+    "scope": "typescript",
+    "prefix": "remote",
+    "body": [
+      "export class ${1:$TM_FILENAME_BASE} implements ${2:$INTERFACE} {",
+      "\tconstructor(",
+      "\t\tprivate readonly endPoint: string,",
+      "\t\tprivate readonly httpClient: HttpClient<${3:$MODEL}>",
+      "\t) {}",
+      "",
+      "\tasync ${4:$FUNCTIONNAME}(): Promise<${3:$MODEL}> {",
+      "\t\tconst httpResponse = await this.httpClient.request({",
+      "\t\t\turl: `${this.endPoint}`,",
+      "\t\t\tmethod: '${5:$method}', //'get' | 'post' | 'put' | 'delete'",
+      "\t\t\t headers: {",
+      "\t\t\t\tauthorization: `Bearer ${new LocalStorageAdapter().get('token')}`,",
+      "\t\t\t},",
+      "\t\t});",
+      "",
+      "\t\treturn handleHttpResponse(httpResponse);",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "Create structure Remote UseCase without imports"
+  },
+
+  "Create UseCase with Imports ": {
+    "scope": "typescript",
+    "prefix": "usecase-i",
+    "body": [
+      "import { AxiosHttpClient } from 'infra/axios-client';",
+      "import { Api } from 'main/config/api';",
+      "",
+      "export interface ${1:$NAME}Interface {",
+      "\t${2:$FUNCTIONNAME}: () => Promise<${3:$MODEL}>;",
+      "}",
+      "",
+      "export const ${1:$NAME}Usecase = (): ${1:$NAME}Interface => {",
+      "\treturn new ${4:$REMOTENAME}(Api.${5:$ENDPOINT}, new AxiosHttpClient());",
+      "}",
+      ""
+    ],
+    "description": "Create structure UseCase with imports"
+  },
+
+  "Create UseCase Without Imports ": {
+    "scope": "typescript",
+    "prefix": "usecase",
+    "body": [
+      "export interface ${1:$NAME}Interface {",
+      "\t${2:$FUNCTIONNAME}: () => Promise<${3:$MODEL}>;",
+      "}",
+      "",
+      "export const ${1:$NAME}Usecase = (): ${1:$NAME}Interface => {",
+      "\treturn new ${4:$REMOTENAME}(Api.${5:$ENDPOINT}, new AxiosHttpClient());",
+      "}",
+      ""
+    ],
+    "description": "Create structure UseCase without imports"
+  }
+}

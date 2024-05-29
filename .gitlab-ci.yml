@@ -1,0 +1,12 @@
+include:
+  - project: navalsubweb/templates
+    file: /ci-cd/react-frontend.gitlab-ci.yml
+
+variables:
+  PORTAL: subweb
+  DISABLE_TESTS: 'true'
+  DISABLE_LINT: 'true'
+
+deploy:
+  variables:
+    JOB_DISABLED: 'true'
