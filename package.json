@@ -1,12 +1,12 @@
 {
-  "name": "boilerplate-lccv",
+  "name": "nz-paoacucar",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/app/lego/",
-    "preview": "vite preview --base=/app/lego/",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "test": "jest",
     "lint": "eslint . --ext .tsx",
     "prepare": "husky install"
