@@ -2,17 +2,19 @@ export const sg = Object.freeze({
   fonts: {},
   colors: {
     backgroundColors: {
-      colorBackgroundSolo: '#E8F4F4',
-      colorBackgroundSky: '#F4F6F8',
-      colorBackgroundGrass: '#F5F6F6',
+      colorBackgroundSolo: '#E4AB57',
+      colorBackgroundComentPage: '#DC9327',
+      colorBackgroundFieldTextUser: '#F9B515',
+      colorBackgroundFieldTextGeneral: '#F9B515',
+      colorBackgroundButtonOne: '#F9B515',
+      colorBackgroundButtonTwo: '#DC9327',
     },
 
-    feedbackColors: {
-      colorFeedbackError: '#DE3333',
-      colorFeedbackSuccess: '#4CAF50',
-      colorFeedbackWarning: '#EDA720',
-      colorFeedbackInfo: '#2196F3',
-      colorFeedbackNeutral: '#ECECEC',
+    textColors: {
+      colorTextDefault: '#5D280D',
+      colorTextNeutral: '#FFFFFF',
+      colorTextWarning: '#EDA720',
+      colorTextInfo: '#2196F3',
     },
   },
 
