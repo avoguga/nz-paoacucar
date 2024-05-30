@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { sg } from './styleGuide';
-
 export const GlobalStyles = createGlobalStyle`
     *, *::after, *::before {
         margin: 0;
@@ -17,13 +15,13 @@ export const GlobalStyles = createGlobalStyle`
         }
 
         ::-webkit-scrollbar-track {
-            /* background: ${sg.colors.neutralColors.colorNeutralSoft};
-            border-radius: ${sg.borders.borderRadius.borderRadiusPill}; */
+            /* background:
+            border-radius:  */
         }
 
         ::-webkit-scrollbar-thumb {
-            /* background: ${sg.colors.neutralColors.colorNeutralClean};
-            border-radius: ${sg.borders.borderRadius.borderRadiusPill}; */
+            /* background:
+            border-radius: */
         }
     }
 
