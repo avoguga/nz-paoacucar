@@ -6,8 +6,8 @@ export const sg = Object.freeze({
       colorBackgroundComentPage: '#DC9327',
       colorBackgroundFieldTextUser: '#F9B515',
       colorBackgroundFieldTextGeneral: '#F9B515',
-      colorBackgroundButtonOne: '#F9B515',
-      colorBackgroundButtonTwo: '#DC9327',
+      colorBackgroundButtonOne: '#DC9327',
+      colorBackgroundButtonTwo: '#FFD600',
     },
 
     textColors: {

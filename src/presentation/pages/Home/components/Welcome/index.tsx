@@ -22,14 +22,19 @@ const Welcome = () => {
           <br />
           <Button
             backgroundColor={
-              sg.colors.backgroundColors.colorBackgroundButtonTwo
+              sg.colors.backgroundColors.colorBackgroundButtonOne
             }
-            text="Deixar Depoimento"
+            textColor={sg.colors.textColors.colorTextNeutral}
             onClick={() => {
               console.log('oi');
             }}
+            style={{
+              fontWeight: '500',
+            }}
             title="Deixar Depoimento"
-          />
+          >
+            Deixar Depoimento
+          </Button>
         </C.TextContainer>
       </C.WelcomeField>
       <br />
@@ -37,7 +42,21 @@ const Welcome = () => {
       <br />
       <br />
       <br />
-      <h1>AQUI VAI OUTRO COMPONENTE</h1>
+      <Button
+        backgroundColor={sg.colors.backgroundColors.colorBackgroundButtonTwo}
+        onClick={() => {
+          console.log('oi');
+        }}
+        title="Galeria de depoimentos"
+        style={{
+          fontWeight: 'bold',
+          fontSize: '1.25rem',
+        }}
+        width="20rem"
+        height="3rem"
+      >
+        Galeria de depoimentos
+      </Button>{' '}
     </C.Container>
   );
 };
