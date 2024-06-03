@@ -1,6 +1,6 @@
 import * as C from './styles';
 import logo from '../../../../../main/assets/icons/ant/CCPA_logo_vertical.png';
-import Button from 'presentation/components/Button';
+import Button from 'presentation/components/atoms/Button';
 import { sg } from 'presentation/styles';
 const Welcome = () => {
   return (
@@ -21,8 +21,14 @@ const Welcome = () => {
           <br />
           <br />
           <Button
-            background={sg.colors.backgroundColors.colorBackgroundButtonOne}
+            backgroundColor={
+              sg.colors.backgroundColors.colorBackgroundButtonTwo
+            }
             text="Deixar Depoimento"
+            onClick={() => {
+              console.log('oi');
+            }}
+            title="Deixar Depoimento"
           />
         </C.TextContainer>
       </C.WelcomeField>
