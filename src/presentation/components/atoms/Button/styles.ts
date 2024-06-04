@@ -1,8 +1,13 @@
 import { sg } from 'presentation/styles';
 import styled from 'styled-components';
+
 interface ContainerProps {
-  background: string;
+  background?: string;
+  width?: string;
+  height?: string;
+  color?: string;
 }
+
 export const Button = styled.button<ContainerProps>`
   width: ${({ width }) => width || '28.125rem'};
   height: ${({ height }) => height || '3.75rem'};
