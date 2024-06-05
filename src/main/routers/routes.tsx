@@ -8,7 +8,7 @@ export const ROUTES = Object.freeze({
     page: () => <PAGES.Home />,
   },
   Relatos: {
-    path: () => '/relatos',
+    path: () => p('/relatos'),
     page: () => <PAGES.Relatos />,
   },
 });
