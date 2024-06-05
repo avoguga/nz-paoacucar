@@ -5,18 +5,14 @@ import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
 import image2 from '../../../../../main/assets/images/background/depoimento-2.webp';
-import video1 from '../../../../../main/assets/videos/sample_640x360.mp4';
-import video2 from '../../../../../main/assets/videos/sample_640x360.mp4';
 
 const Welcome = () => {
   const items: CarouselItem[] = [
-    { type: 'video', content: video1 },
-    { type: 'video', content: video2 },
     { type: 'text', content: '/relatos', imageUrl: image1 },
     { type: 'text', content: '/relatos', imageUrl: image2 },
-    { type: 'video', content: video1 },
+
     { type: 'text', content: '/relatos', imageUrl: image1 },
-    { type: 'video', content: video2 },
+
     { type: 'text', content: '/relatos', imageUrl: image2 },
   ];
 
