@@ -1,10 +1,12 @@
+import { sg } from 'presentation/styles';
 import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #d69b42; /* Cor de fundo semelhante à imagem */
+  background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
+
   padding: 20px;
 `;
 

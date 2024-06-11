@@ -1,50 +1,46 @@
 import styled from 'styled-components';
+import { sg } from 'presentation/styles';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  background-color: #d69b42; /* Cor de fundo semelhante à imagem */
+  background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
+  height: 100vh;
+  gap: 25px;
   padding: 20px;
 `;
 
-export const TestimonialsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
+export const TextProfile = styled.aside`
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: space-around;
+  align-items: center;
+`;
+export const TextImageGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 25px;
 `;
 
-export const TestimonialCard = styled.div`
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  &:hover img {
-    opacity: 0.8;
-  }
+export const Logo = styled.img`
+  margin-bottom: 15px;
+  width: 330px;
+  height: 330px;
 `;
 
 export const Image = styled.img`
-  width: 100%;
+  width: 400px;
+  height: 230px;
   height: auto;
   display: block;
 `;
 
-export const TextIcon = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  width: 50px;
+export const TextIcon = styled.img`
+  width: 180%;
   height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 24px;
 `;
 
 export const RelatoContent = styled.div`
@@ -63,10 +59,18 @@ export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${sg.colors.backgroundColors
+    .colorBackgroundFieldTextGeneral};
+  width: 800px;
+  height: 800px;
+  overflow-y: scroll;
 `;
 
 export const Text = styled.p`
-  font-size: 1.2rem;
-  color: #333;
-  padding: 20px;
+  font-size: 26px;
+  color: ${sg.colors.textColors.colorTextDefault};
+  margin: 50px;
+  text-align: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
 `;
