@@ -5,6 +5,8 @@ export const CarouselContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  position: relative;
+  background-color: #e4ab57;
 `;
 
 export const ArrowButton = styled.button`
@@ -15,22 +17,22 @@ export const ArrowButton = styled.button`
   color: #4c4039;
   height: 250px;
   z-index: 2;
+  position: absolute;
 
   &:first-child {
-    left: 1rem;
+    left: 0;
     background: linear-gradient(
       to right,
-      rgba(211, 141, 78, 1),
+      rgba(228, 171, 87, 1),
       rgba(211, 141, 78, 0)
     );
   }
 
   &:last-child {
-    right: 1rem;
-    z-index: 2;
+    right: 0;
     background: linear-gradient(
       to left,
-      rgba(211, 141, 78, 1),
+      rgba(228, 171, 87, 1),
       rgba(211, 141, 78, 0)
     );
   }
@@ -41,8 +43,11 @@ export const VideoWrapper = styled.div`
   overflow-x: auto;
   width: 100%;
   scroll-behavior: smooth;
-  .invisible-scrollbar::-webkit-scrollbar {
-    display: none;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 `;
 

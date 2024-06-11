@@ -5,8 +5,12 @@ import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
 import image2 from '../../../../../main/assets/images/background/depoimento-2.webp';
+import { useState } from 'react';
+import GiveTestimonialModal from 'presentation/components/molecules/GiveTestimonialModal';
 
 const Welcome = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const items: CarouselItem[] = [
     { type: 'text', content: '/relatos', imageUrl: image1 },
     { type: 'text', content: '/relatos', imageUrl: image2 },
@@ -15,6 +19,14 @@ const Welcome = () => {
 
     { type: 'text', content: '/relatos', imageUrl: image2 },
   ];
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <C.Container>
@@ -38,9 +50,7 @@ const Welcome = () => {
               sg.colors.backgroundColors.colorBackgroundButtonOne
             }
             textColor={sg.colors.textColors.colorTextNeutral}
-            onClick={() => {
-              console.log('oi');
-            }}
+            onClick={handleOpenModal}
             style={{
               fontWeight: '500',
             }}
@@ -72,6 +82,9 @@ const Welcome = () => {
       </Button>{' '}
       <br /> <br />
       <VideoCarousel items={items} />
+      {isModalOpen && (
+        <GiveTestimonialModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      )}
     </C.Container>
   );
 };

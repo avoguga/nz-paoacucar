@@ -20,7 +20,10 @@ const AllTestimonials: React.FC<AllTestimonialsProps> = ({ items }) => {
 
   const handleCardClick = (item: CarouselItem) => {
     if (item.type === 'video') {
-      navigate(`/relato/video/${item.id}`);
+      // navigate(`/relato/video/${item.id}`);
+      navigate(`/relato/text/${item.id}`, {
+        state: { imageUrl: item.imageUrl },
+      });
     } else {
       navigate(`/relato/text/${item.id}`, {
         state: { imageUrl: item.imageUrl },
