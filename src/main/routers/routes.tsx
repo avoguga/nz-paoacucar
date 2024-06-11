@@ -11,9 +11,8 @@ export const ROUTES = Object.freeze({
     path: () => p('/relatos'),
     page: () => <PAGES.Relatos />,
   },
-  TEXT_DETAIL: {
-    path: () => p(`/relato/text/id`),
-    // eslint-disable-next-line import/namespace
+  text_detail: {
+    path: () => p('/relato/text/:id'), // Parâmetro dinâmico `id`
     page: () => <PAGES.TextDetails />,
   },
 });

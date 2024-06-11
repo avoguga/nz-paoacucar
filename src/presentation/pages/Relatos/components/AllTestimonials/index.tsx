@@ -22,7 +22,9 @@ const AllTestimonials: React.FC<AllTestimonialsProps> = ({ items }) => {
     if (item.type === 'video') {
       navigate(`/relato/video/${item.id}`);
     } else {
-      navigate(`/relato/text/${item.id}`);
+      navigate(`/relato/text/${item.id}`, {
+        state: { imageUrl: item.imageUrl },
+      });
     }
   };
 
