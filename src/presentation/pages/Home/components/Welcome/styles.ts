@@ -25,13 +25,13 @@ export const TextContainer = styled.div`
   width: 25%;
   p {
     font-size: 26px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: -0.49px;
     text-align: center;
   }
   h1 {
     font: 51px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
+
+    font-weight: 700;
     margin-bottom: 5px;
   }
 `;

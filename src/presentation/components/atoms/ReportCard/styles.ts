@@ -38,10 +38,8 @@ export const CloseButton = styled.button`
   width: 100%;
   position: absolute;
   display: flex;
-
   top: 5%;
   right: 9%;
-
   justify-content: right;
 `;
 
@@ -54,12 +52,36 @@ export const Image = styled.img`
 export const Content = styled.div`
   padding: 20px;
   border-radius: 8px;
-
   margin-top: 10px;
+  color: ${sg.colors.textColors.colorTextNeutral};
 `;
 
 export const Text = styled.p`
   font-size: 15.5px;
+  margin-bottom: 10px;
+`;
 
-  color: ${sg.colors.textColors.colorTextNeutral};
+export const Divider = styled.div`
+  height: 1px;
+  background-color: ${sg.colors.textColors.colorTextNeutral};
+  margin: 20px 0;
+`;
+
+export const HorizontalLine = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: ${sg.colors.backgroundColors.colorBackgroundFieldTextUser};
+  margin: 10px 0;
+`;
+
+export const Comment = styled.div`
+  font-size: 15px;
+  margin-top: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin-top: 15px;
+  }
 `;

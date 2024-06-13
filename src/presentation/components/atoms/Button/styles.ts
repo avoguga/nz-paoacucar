@@ -16,7 +16,7 @@ export const Button = styled.button<ContainerProps>`
   text-align: center;
   font-size: 2rem;
   color: ${({ color }) => color || sg.colors.textColors.colorTextDefault};
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   align-items: center;
   justify-content: center;
 `;

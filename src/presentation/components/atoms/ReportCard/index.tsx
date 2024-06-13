@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sg } from 'presentation/styles';
 import Button from '../Button';
@@ -28,6 +28,22 @@ const ReportCard = ({ icon, content }) => {
         </C.Profile>
         <C.Content>
           <C.Text>{content}</C.Text>
+          <C.HorizontalLine />
+          <C.Comment>
+            <strong>João da Silva</strong>
+            <span>comentou em 05 de janeiro de 2024</span>
+
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+              semper, ex vel laoreet hendrerit, lectus orci suscipit massa, in
+              dictum nunc orci sit amet nulla. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Maecenas semper, ex vel laoreet
+              hendrerit, lectus orci suscipit massa, in dictum nunc orci sit
+              amet nulla. Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Maecenas semper, ex vel laoreet hendrerit, lectus orci
+              suscipit massa, in dictum nunc orci sit amet nulla.
+            </p>
+          </C.Comment>
         </C.Content>
       </C.Container>
       <Button

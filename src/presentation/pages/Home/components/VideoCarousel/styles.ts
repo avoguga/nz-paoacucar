@@ -1,3 +1,4 @@
+import { sg } from 'presentation/styles';
 import styled from 'styled-components';
 
 export const CarouselContainer = styled.div`
@@ -6,7 +7,7 @@ export const CarouselContainer = styled.div`
   justify-content: center;
   padding: 1rem;
   position: relative;
-  background-color: #e4ab57;
+  background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
 `;
 
 export const ArrowButton = styled.button`
@@ -20,7 +21,8 @@ export const ArrowButton = styled.button`
   position: absolute;
 
   &:first-child {
-    left: 0;
+    left: 60px;
+
     background: linear-gradient(
       to right,
       rgba(228, 171, 87, 1),
@@ -29,7 +31,7 @@ export const ArrowButton = styled.button`
   }
 
   &:last-child {
-    right: 0;
+    right: 60px;
     background: linear-gradient(
       to left,
       rgba(228, 171, 87, 1),
@@ -41,7 +43,7 @@ export const ArrowButton = styled.button`
 export const VideoWrapper = styled.div`
   display: flex;
   overflow-x: auto;
-  width: 100%;
+  width: 90%;
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
@@ -53,19 +55,20 @@ export const VideoWrapper = styled.div`
 
 export const VideoItem = styled.div`
   min-width: 25%;
-  margin: 0 1rem;
+  margin: 0 -1.3rem;
   position: relative;
 `;
 
-export const Video = styled.iframe`
+export const Video = styled.img`
   width: 100%;
   height: 200px;
 `;
 
 export const ArrowIcon = styled.img`
-  margin: 15px;
-  width: 2rem;
-  height: 2rem;
+  margin: 0px;
+  width: 28px;
+  height: 45px;
+
   color: #5d280d;
 `;
 
@@ -75,13 +78,13 @@ export const TextItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0;
+  background-color: transparent;
   position: relative;
 `;
 
 export const TextImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 350px;
+  max-height: 200px;
 `;
 
 export const TextIcon = styled.img`
