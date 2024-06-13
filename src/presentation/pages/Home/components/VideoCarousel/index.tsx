@@ -51,15 +51,12 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
       <C.ArrowButton onClick={handlePrevClick}>
         <C.ArrowIcon src={setaEsquerda} alt="Seta Esquerda" />
       </C.ArrowButton>
+
       <C.VideoWrapper ref={carouselRef} {...swipeHandlers}>
         {items.map((item, index) => (
           <C.VideoItem key={index} onClick={handleClick}>
             {item.type === 'video' ? (
-              <C.Video
-                src={item.content}
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <C.Video src={item.content} />
             ) : (
               <C.TextItem>
                 <C.TextImage src={item.imageUrl} alt="Texto Relato" />

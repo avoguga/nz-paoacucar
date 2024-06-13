@@ -4,7 +4,6 @@ import Button from 'presentation/components/atoms/Button';
 import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
-import image2 from '../../../../../main/assets/images/background/depoimento-2.webp';
 import { useState } from 'react';
 import GiveTestimonialModal from 'presentation/components/molecules/GiveTestimonialModal';
 
@@ -13,11 +12,13 @@ const Welcome = () => {
 
   const items: CarouselItem[] = [
     { type: 'text', content: '/relatos', imageUrl: image1 },
-    { type: 'text', content: '/relatos', imageUrl: image2 },
+    { type: 'text', content: '/relatos', imageUrl: image1 },
 
     { type: 'text', content: '/relatos', imageUrl: image1 },
 
-    { type: 'text', content: '/relatos', imageUrl: image2 },
+    { type: 'text', content: '/relatos', imageUrl: image1 },
+    { type: 'text', content: '/relatos', imageUrl: image1 },
+    { type: 'text', content: '/relatos', imageUrl: image1 },
   ];
 
   const handleOpenModal = () => {

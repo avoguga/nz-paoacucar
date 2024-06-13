@@ -71,6 +71,6 @@ export const Text = styled.p`
   color: ${sg.colors.textColors.colorTextDefault};
   margin: 50px;
   text-align: left;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   font-weight: 700;
 `;
