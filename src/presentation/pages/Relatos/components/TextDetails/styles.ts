@@ -71,6 +71,16 @@ export const Text = styled.p`
   color: ${sg.colors.textColors.colorTextDefault};
   margin: 50px;
   text-align: left;
+  letter-spacing: -0.49px;
+  font-family: 'myFont', sans-serif;
+  font-weight: 500;
+`;
 
-  font-weight: 700;
+export const ProfileText = styled.h2`
+  font-size: 34px;
+  color: ${sg.colors.textColors.colorTextDefault};
+
+  text-align: left;
+
+  font-family: 'myFont', sans-serif;
 `;

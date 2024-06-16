@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
 
 @font-face {
-        font-family: 'MinhaFonte';
+        font-family: 'MinhaFonte', sans-serif;
         src: url('../../main/assets/fonts/bahnschrift.woff') format('truetype');
         
     }
