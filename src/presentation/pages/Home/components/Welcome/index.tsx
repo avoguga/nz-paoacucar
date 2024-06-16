@@ -4,22 +4,32 @@ import Button from 'presentation/components/atoms/Button';
 import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GiveTestimonialModal from 'presentation/components/molecules/GiveTestimonialModal';
+import axios from 'axios';
 
 const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [items, setItems] = useState<CarouselItem[]>([]);
 
-  const items: CarouselItem[] = [
-    { type: 'text', content: '/relatos', imageUrl: image1 },
-    { type: 'text', content: '/relatos', imageUrl: image1 },
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/depoimentos');
+        const data = response.data.map((depoimento: any) => ({
+          id: depoimento._id,
+          type: depoimento.videoUrl ? 'video' : 'text',
+          content: depoimento.texto || depoimento.videoUrl,
+          imageUrl: depoimento.fotoUrl || image1, // Usar uma imagem padrão se não houver foto
+        }));
+        setItems(data);
+      } catch (error) {
+        console.error('Erro ao buscar depoimentos:', error);
+      }
+    };
 
-    { type: 'text', content: '/relatos', imageUrl: image1 },
-
-    { type: 'text', content: '/relatos', imageUrl: image1 },
-    { type: 'text', content: '/relatos', imageUrl: image1 },
-    { type: 'text', content: '/relatos', imageUrl: image1 },
-  ];
+    fetchTestimonials();
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

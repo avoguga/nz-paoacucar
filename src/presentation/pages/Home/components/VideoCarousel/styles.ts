@@ -8,6 +8,7 @@ export const CarouselContainer = styled.div`
   padding: 1rem;
   position: relative;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
+  overflow-x: scroll;
 `;
 
 export const ArrowButton = styled.button`
@@ -42,7 +43,7 @@ export const ArrowButton = styled.button`
 
 export const VideoWrapper = styled.div`
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   width: 90%;
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* Internet Explorer 10+ */

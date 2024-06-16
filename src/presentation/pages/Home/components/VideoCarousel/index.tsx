@@ -20,6 +20,7 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
 
   const handlePrevClick = () => {
     if (carouselRef.current) {
+      console.log('Previous button clicked');
       carouselRef.current.scrollBy({
         left: -carouselRef.current.clientWidth,
         behavior: 'smooth',
@@ -29,6 +30,7 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
 
   const handleNextClick = () => {
     if (carouselRef.current) {
+      console.log('Next button clicked');
       carouselRef.current.scrollBy({
         left: carouselRef.current.clientWidth,
         behavior: 'smooth',
