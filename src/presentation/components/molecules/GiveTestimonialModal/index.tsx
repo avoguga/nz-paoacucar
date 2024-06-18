@@ -5,6 +5,9 @@ import close from '../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../main/assets/icons/ant/CCPA_logo_vertical.png';
 import Play from '../../../../main/assets/icons/small/Play-video.png';
 import Texto from '../../../../main/assets/icons/small/Texto.png';
+import FirstStepText from './components/TextTestimonial/FirstStepText';
+import SecondStepText from './components/TextTestimonial/SecondStepText';
+import ThirdStepText from './components/TextTestimonial/ThirdStepText';
 import FirstStep from './components/VideoTestimonial/FirstStep';
 import SecondStep from './components/VideoTestimonial/SecondStep';
 import ThirdStep from './components/VideoTestimonial/ThirdStep';
@@ -19,6 +22,14 @@ const GiveTestimonialModal = ({
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const [currentStep, setCurrentStep] = useState(0);
+  const [testimonialData, setTestimonialData] = useState<{
+    nome: string;
+    email: string;
+    telefone: string;
+  }>({ nome: '', email: '', telefone: '' });
+  const [testimonialType, setTestimonialType] = useState<
+    'video' | 'text' | null
+  >(null);
 
   const steps = [
     {
@@ -38,10 +49,20 @@ const GiveTestimonialModal = ({
           <C.OptionsContainer>
             <C.OptionsTitle>Escolha uma das opções</C.OptionsTitle>
             <C.OptionsButtons>
-              <C.OptionsButton onClick={() => setCurrentStep(1)}>
+              <C.OptionsButton
+                onClick={() => {
+                  setTestimonialType('video');
+                  setCurrentStep(1);
+                }}
+              >
                 <img src={Play} alt="video" /> Video
               </C.OptionsButton>
-              <C.OptionsButton onClick={() => setCurrentStep(1)}>
+              <C.OptionsButton
+                onClick={() => {
+                  setTestimonialType('text');
+                  setCurrentStep(4);
+                }}
+              >
                 <img src={Texto} alt="Texto" /> Texto
               </C.OptionsButton>
             </C.OptionsButtons>
@@ -70,6 +91,52 @@ const GiveTestimonialModal = ({
         <ThirdStep
           onBackClick={() => setCurrentStep(2)}
           onNextClick={() => setCurrentStep(4)}
+        />
+      ),
+    },
+    {
+      content: (
+        <FirstStepText
+          onBackClick={() => setCurrentStep(0)}
+          onNextClick={(data: any) => {
+            setTestimonialData(data);
+            setCurrentStep(5);
+          }}
+        />
+      ),
+    },
+    {
+      content: (
+        <SecondStepText
+          onBackClick={() => setCurrentStep(4)}
+          onNextClick={() => setCurrentStep(6)}
+        />
+      ),
+    },
+    {
+      content: (
+        <ThirdStepText
+          onBackClick={() => setCurrentStep(5)}
+          onSubmit={(texto) => {
+            const finalData = { ...testimonialData, texto };
+            // Enviar dados para a API
+            fetch('http://localhost:3001/depoimentos', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(finalData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log('Depoimento criado com sucesso:', data);
+                setCurrentStep(0);
+                onClose && onClose();
+              })
+              .catch((error) => {
+                console.error('Erro ao criar depoimento:', error);
+              });
+          }}
         />
       ),
     },
