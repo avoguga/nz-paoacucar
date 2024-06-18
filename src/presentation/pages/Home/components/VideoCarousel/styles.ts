@@ -56,7 +56,7 @@ export const VideoWrapper = styled.div`
 
 export const VideoItem = styled.div`
   min-width: 25%;
-  margin: 0 -1.3rem;
+  margin: 0 1.5rem;
   position: relative;
 `;
 
