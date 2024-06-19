@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sg } from 'presentation/styles';
@@ -6,15 +7,31 @@ import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
 import { Modal } from 'presentation/components/molecules/ComentModal';
 
-const ReportCard = ({ icon, content }) => {
+const ReportCard = ({
+  icon,
+  content,
+  initialComments,
+  depoimentoId,
+  refreshComments,
+}) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [comments, setComments] = useState(initialComments);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-  const submitComment = () => {
-    console.log('Comment submitted');
-    closeModal();
+
+  const sendComment = async (newCommentDetails) => {
+    try {
+      await axios.post(
+        `http://localhost:3001/depoimentos/${depoimentoId}/comentarios`,
+        newCommentDetails
+      );
+      refreshComments();
+      closeModal();
+    } catch (error) {
+      console.error('Erro ao adicionar comentário:', error);
+    }
   };
 
   return (
@@ -29,30 +46,20 @@ const ReportCard = ({ icon, content }) => {
         <C.Content>
           <C.Text>{content}</C.Text>
           <C.HorizontalLine />
-          <C.Comment>
-            <strong>João da Silva</strong>
-            <span>comentou em 05 de janeiro de 2024</span>
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              semper, ex vel laoreet hendrerit, lectus orci suscipit massa, in
-              dictum nunc orci sit amet nulla. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Maecenas semper, ex vel laoreet
-              hendrerit, lectus orci suscipit massa, in dictum nunc orci sit
-              amet nulla. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Maecenas semper, ex vel laoreet hendrerit, lectus orci
-              suscipit massa, in dictum nunc orci sit amet nulla.
-            </p>
-          </C.Comment>
+          {comments.map((comment, index) => (
+            <C.Comment key={index}>
+              <strong>{comment.nome}</strong>
+              <span>comentou em {comment.data}</span>
+              <p>{comment.comentario}</p>
+            </C.Comment>
+          ))}
         </C.Content>
       </C.Container>
       <Button
         backgroundColor={sg.colors.backgroundColors.colorBackgroundButtonOne}
         textColor={sg.colors.textColors.colorTextNeutral}
         onClick={openModal}
-        style={{
-          fontWeight: '500',
-        }}
+        style={{ fontWeight: '500' }}
         title="Comentar"
       >
         Comentar
@@ -60,7 +67,8 @@ const ReportCard = ({ icon, content }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSubmit={submitComment}
+        onClickButton={sendComment}
+        testimonialPersonName={initialComments[0]?.name || 'Unknown'}
       />
     </C.Main>
   );

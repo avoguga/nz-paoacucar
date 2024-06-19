@@ -53,9 +53,9 @@ export const Input = styled.input`
   font-weight: bold;
   text-align: center;
   width: 577px;
-
+  color: #5d280d;
   ::placeholder {
-    color: #5d280d;
+    color: rgba(93, 40, 13, 0.4);
   }
 `;
 
@@ -68,9 +68,9 @@ export const TextArea = styled.textarea`
   font-size: 25px;
   resize: none;
   width: 577px;
-
+  color: #5d280d;
   ::placeholder {
-    color: #5d280d;
+    color: rgba(93, 40, 13, 0.4);
   }
 `;
 

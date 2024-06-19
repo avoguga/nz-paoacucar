@@ -1,10 +1,33 @@
+import React, { useState } from 'react';
 import { sg } from 'presentation/styles';
 import * as C from './styles';
-import Button from '../../atoms/Button';
-import close from '../../../../main/assets/icons/small/Fechar.svg';
-import confirmar from '../../../../main/assets/icons/small/Confirmar.png';
+import closeIcon from '../../../../main/assets/icons/small/Fechar.svg';
+import confirmIcon from '../../../../main/assets/icons/small/Confirmar.png';
 
-export const Modal = ({ isOpen, onClose, onSubmit }) => {
+export const Modal = ({
+  isOpen,
+  onClose,
+  onClickButton,
+  testimonialPersonName,
+}) => {
+  const [name, setName] = useState('');
+  const [comment, setComment] = useState('');
+  const [charCount, setCharCount] = useState(0);
+
+  const handleSubmit = () => {
+    if (name.trim() && comment.trim()) {
+      const newCommentDetails = {
+        nome: name,
+        comentario: comment,
+        data: new Date().toISOString(),
+      };
+      onClickButton(newCommentDetails);
+      setName('');
+      setComment('');
+      setCharCount(0);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -12,36 +35,45 @@ export const Modal = ({ isOpen, onClose, onSubmit }) => {
       <C.ModalContainer>
         <C.ModalHeader>
           <C.ModalTitle>
-            Comentando depoimento de <p>Camila Araujo</p>
+            Comentando depoimento de <p>{testimonialPersonName}</p>
           </C.ModalTitle>
         </C.ModalHeader>
         <C.ModalBody>
-          <C.Input placeholder="Seu nome" />
-          <C.TextArea placeholder="Seu comentário" maxLength="500" />
+          <C.Input
+            placeholder="Seu nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <C.TextArea
+            placeholder="Seu comentário"
+            maxLength="500"
+            value={comment}
+            onChange={(e) => {
+              setComment(e.target.value);
+              setCharCount(e.target.value.length);
+            }}
+          />
         </C.ModalBody>
         <C.ModalFooter>
           <C.CharCounter>
-            104 / 500 <p>caracteres</p>
+            {charCount} / 500 <p>caracteres</p>
           </C.CharCounter>
-
           <C.Button
-            background={'#F9B515'}
+            background="#F9B515"
             textColor={sg.colors.textColors.colorTextNeutral}
-            onClick={onSubmit}
-            width={'263px'}
+            onClick={handleSubmit}
             title="Confirmar"
           >
-            <img src={confirmar} alt="Confirmar" />
+            <img src={confirmIcon} alt="Confirmar" />
             <span>Confirmar</span>
           </C.Button>
           <C.Button
-            background={'#F9B515'}
+            background="#F9B515"
             textColor={sg.colors.textColors.colorTextNeutral}
             onClick={onClose}
             title="Cancelar"
-            width={'263px'}
           >
-            <img src={close} alt="Close" />
+            <img src={closeIcon} alt="Close" />
             <span>Cancelar</span>
           </C.Button>
         </C.ModalFooter>

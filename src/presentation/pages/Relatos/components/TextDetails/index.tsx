@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import * as C from './styles';
@@ -8,12 +8,19 @@ import chatIcon from '../../../../../main/assets/icons/small/chat.svg';
 import ReportCard from 'presentation/components/atoms/ReportCard';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
 
+interface Comment {
+  nome: string;
+  data: string;
+  comentario: string;
+}
+
 interface Depoimento {
   id: string;
   type: 'text' | 'video';
   content: string;
   imageUrl?: string;
   nome: string;
+  comments: Comment[];
 }
 
 const TextDetail = () => {
@@ -22,29 +29,29 @@ const TextDetail = () => {
   const [depoimento, setDepoimento] = useState<Depoimento | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchDepoimento = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/depoimentos/${id}`
-        );
-        const data = response.data;
-        setDepoimento({
-          id: data._id,
-          type: data.videoUrl ? 'video' : 'text',
-          content: data.texto || data.videoUrl,
-          imageUrl: data.fotoUrl || image1,
-          nome: data.nome,
-        });
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-      } catch (error: any) {
-        console.error('Erro ao buscar depoimento:', error);
-        setError('Erro ao buscar depoimento.');
-      }
-    };
-
-    fetchDepoimento();
+  const fetchDepoimento = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/depoimentos/${id}`
+      );
+      const data = response.data;
+      setDepoimento({
+        id: data._id,
+        type: data.videoUrl ? 'video' : 'text',
+        content: data.texto || data.videoUrl,
+        imageUrl: data.fotoUrl || image1,
+        nome: data.nome,
+        comments: data.comentarios || [],
+      });
+    } catch (error) {
+      console.error('Erro ao buscar depoimento:', error);
+      setError('Erro ao buscar depoimento.');
+    }
   }, [id]);
+
+  useEffect(() => {
+    fetchDepoimento();
+  }, [id, fetchDepoimento]);
 
   if (error) {
     return <div>{error}</div>;
@@ -58,7 +65,6 @@ const TextDetail = () => {
     <C.Container>
       <C.TextProfile>
         <C.Logo src={logo} alt="" />
-
         <C.TextImageGroup>
           <C.TextIcon src={textIcon} alt="" />
           <C.Image src={depoimento.imageUrl} alt="Text Thumbnail" />
@@ -70,7 +76,13 @@ const TextDetail = () => {
           <C.Text>{depoimento.content}</C.Text>
         </C.TextContent>
       </C.RelatoContent>
-      <ReportCard icon={chatIcon} content={depoimento.content} />
+      <ReportCard
+        icon={chatIcon}
+        content={depoimento.content}
+        initialComments={depoimento.comments}
+        depoimentoId={depoimento.id}
+        refreshComments={fetchDepoimento}
+      />
     </C.Container>
   );
 };

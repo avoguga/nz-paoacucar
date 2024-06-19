@@ -43,12 +43,6 @@ export const CloseButton = styled.button`
   justify-content: right;
 `;
 
-export const Image = styled.img`
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-`;
-
 export const Content = styled.div`
   padding: 20px;
   border-radius: 8px;
@@ -59,12 +53,6 @@ export const Content = styled.div`
 export const Text = styled.p`
   font-size: 15.5px;
   margin-bottom: 10px;
-`;
-
-export const Divider = styled.div`
-  height: 1px;
-  background-color: ${sg.colors.textColors.colorTextNeutral};
-  margin: 20px 0;
 `;
 
 export const HorizontalLine = styled.div`
