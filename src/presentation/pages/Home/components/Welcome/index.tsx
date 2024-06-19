@@ -1,5 +1,5 @@
 import * as C from './styles';
-import logo from '../../../../../main/assets/icons/ant/CCPA_logo_vertical.png';
+import logo from '../../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
 import Button from 'presentation/components/atoms/Button';
 import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
