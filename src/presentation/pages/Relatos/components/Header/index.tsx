@@ -2,7 +2,7 @@ import Button from 'presentation/components/atoms/Button';
 import * as C from './styles';
 import { sg } from 'presentation/styles';
 
-import logo from '../../../../../main/assets/icons/ant/CCPA_logo_horizontal.png';
+import logo from '../../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
 import HomeIcon from '../../../../../main/assets/icons/small/Inicio.svg';
 import { useNavigate } from 'react-router-dom';
 

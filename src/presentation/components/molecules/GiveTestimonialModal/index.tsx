@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
-import logo from '../../../../main/assets/icons/ant/CCPA_logo_vertical.png';
+import logo from '../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
 import Play from '../../../../main/assets/icons/small/Play-video.png';
 import Texto from '../../../../main/assets/icons/small/Texto.png';
 import FirstStepText from './components/TextTestimonial/FirstStepText';
