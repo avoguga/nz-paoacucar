@@ -57,13 +57,13 @@ export const Text = styled.p`
 
 export const HorizontalLine = styled.div`
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: ${sg.colors.backgroundColors.colorBackgroundFieldTextUser};
-  margin: 10px 0;
+  margin: 1.5rem 0;
 `;
 
 export const Comment = styled.div`
-  font-size: 15px;
+  font-size: 0.875rem;
   margin-top: 20px;
   text-align: left;
   display: flex;
@@ -71,5 +71,9 @@ export const Comment = styled.div`
 
   p {
     margin-top: 15px;
+  }
+
+  span {
+    font-size: 0.75;
   }
 `;

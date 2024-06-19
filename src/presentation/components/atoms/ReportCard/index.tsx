@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sg } from 'presentation/styles';
 import Button from '../Button';
@@ -12,26 +12,41 @@ const ReportCard = ({
   content,
   initialComments,
   depoimentoId,
-  refreshComments,
+  fetchDepoimento,
 }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
   const [comments, setComments] = useState(initialComments);
+
+  useEffect(() => {
+    setComments(initialComments);
+  }, [initialComments]);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
   const sendComment = async (newCommentDetails) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `http://localhost:3001/depoimentos/${depoimentoId}/comentarios`,
         newCommentDetails
       );
-      refreshComments();
+      const newComment = response.data;
+      setComments((prevComments) => [...prevComments, newComment]);
+      fetchDepoimento();
       closeModal();
     } catch (error) {
       console.error('Erro ao adicionar comentário:', error);
     }
+  };
+
+  const formatDate = (dateString) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    };
+    return new Date(dateString).toLocaleDateString('pt-BR', options);
   };
 
   return (
@@ -44,14 +59,15 @@ const ReportCard = ({
           <C.Icon src={icon} alt="Icon" />
         </C.Profile>
         <C.Content>
-          <C.Text>{content}</C.Text>
-          <C.HorizontalLine />
           {comments.map((comment, index) => (
-            <C.Comment key={index}>
-              <strong>{comment.nome}</strong>
-              <span>comentou em {comment.data}</span>
-              <p>{comment.comentario}</p>
-            </C.Comment>
+            <>
+              <C.Comment key={index}>
+                <strong>{comment.nome}</strong>
+                <span>comentou em {formatDate(comment.data)}</span>
+                <p>{comment.comentario}</p>
+              </C.Comment>
+              <C.HorizontalLine />
+            </>
           ))}
         </C.Content>
       </C.Container>
@@ -68,7 +84,7 @@ const ReportCard = ({
         isOpen={isModalOpen}
         onClose={closeModal}
         onClickButton={sendComment}
-        testimonialPersonName={initialComments[0]?.name || 'Unknown'}
+        testimonialPersonName={comments[0]?.nome || 'Unknown'}
       />
     </C.Main>
   );

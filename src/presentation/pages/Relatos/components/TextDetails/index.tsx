@@ -81,7 +81,7 @@ const TextDetail = () => {
         content={depoimento.content}
         initialComments={depoimento.comments}
         depoimentoId={depoimento.id}
-        refreshComments={fetchDepoimento}
+        fetchDepoimento={fetchDepoimento}
       />
     </C.Container>
   );
