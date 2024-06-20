@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-import Play from '../../../../../../main/assets/icons/small/Play-video.png';
-import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
-import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
+import Text from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
+import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
+import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 
 interface FirstStepTextProps {
   onBackClick: () => void;
@@ -33,7 +33,7 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
   return (
     <C.Container>
       <C.Header>
-        <img src={Play} alt="video" />
+        <img src={Text} alt="video" />
         <C.TitleMsg>
           Você optou por escrever um depoimento, siga as instruções, são apenas
           algumas etapas. O texto pode ter até 500 caracteres.

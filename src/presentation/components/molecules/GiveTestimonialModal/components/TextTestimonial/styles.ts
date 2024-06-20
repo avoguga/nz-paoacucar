@@ -158,3 +158,130 @@ export const FooterText = styled.div`
   justify-content: space-between;
   gap: 70rem;
 `;
+
+// QUARTO PASSO
+
+export const WebcamContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  border-radius: 10px; /* Ajuste conforme necessário */
+  overflow: hidden;
+`;
+export const LogoContainer = styled.div`
+  position: absolute;
+  top: 2%;
+  left: 5%;
+`;
+export const CameraButton = styled.button`
+  display: flex;
+  align-items: center;
+
+  flex-direction: column;
+  background-color: transparent;
+  color: #5d280d;
+
+  font-weight: bold;
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 8rem;
+    margin-top: 15px;
+  }
+
+  img {
+    border-radius: 50px;
+    width: 180px;
+    height: 178px;
+    margin-top: 3rem;
+  }
+`;
+
+export const TitleCaptureImage = styled.h2`
+  width: 80%;
+  font-size: 26px;
+  color: #5d280d;
+  text-align: center;
+`;
+
+export const HeaderCapture = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+export const ClickImage = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+`;
+
+//QUINTO PASSO
+
+export const PhotoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+
+  background-color: #fff;
+
+  overflow: hidden;
+`;
+
+export const CapturedImage = styled.img`
+  width: 100%;
+  height: 672px;
+`;
+export const FiveStepGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  h3 {
+    width: 70%;
+    font-size: 26px;
+    color: #5d280d;
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: -0.49px;
+  }
+  span {
+    font-weight: 600;
+    font-size: 50px;
+  }
+`;
+
+export const FiveStepButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: transparent;
+  color: #5d280d;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  gap: 5px;
+  margin: 35px;
+
+  h2 {
+    font-size: 34px;
+    white-space: nowrap;
+    margin: 0;
+
+    margin-left: 25px;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;

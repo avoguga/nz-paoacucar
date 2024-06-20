@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as C from './styles';
 import logo from '../../../../../main/assets/icons/ant/logo vertical 150ppi.svg';
 import textIcon from '../../../../../main/assets/icons/small/Texto-marrom.svg';
-import chatIcon from '../../../../../main/assets/icons/small/chat.svg';
+import chatIcon from '../../../../../main/assets/icons/small/conversa.svg';
 import ReportCard from 'presentation/components/atoms/ReportCard';
 import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
 
@@ -39,7 +39,9 @@ const TextDetail = () => {
         id: data._id,
         type: data.videoUrl ? 'video' : 'text',
         content: data.texto || data.videoUrl,
-        imageUrl: data.fotoUrl || image1,
+        imageUrl: data.fotoUrl
+          ? `http://localhost:3001${data.fotoUrl}`
+          : image1,
         nome: data.nome,
         comments: data.comentarios || [],
       });

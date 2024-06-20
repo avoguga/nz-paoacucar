@@ -1,4 +1,4 @@
-import Play from '../../../../../../main/assets/icons/small/Play-video.png';
+import Text from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
 import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
 import * as C from './styles';
@@ -12,7 +12,7 @@ const SecondStep = ({ onBackClick, onNextClick }: SecondStepProps) => {
   return (
     <C.Container>
       <C.Header>
-        <img src={Play} alt="video" />
+        <img src={Text} alt="video" />
         <C.TitleMsg>
           Olá Nome, Estamos prestes a começar. Antes disso, precisamos da sua
           autorização para que o museu utilize sua imagem.

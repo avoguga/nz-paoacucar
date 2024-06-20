@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import * as C from './styles'; // Importando os componentes estilizados
-import setaDireita from '../../../../../main/assets/icons/small/Seta_direita.png';
-import setaEsquerda from '../../../../../main/assets/icons/small/Seta_esquerda.png';
-import textIcon from '../../../../../main/assets/icons/small/Texto.svg'; // Adicione esta linha
+import * as C from './styles';
+import setaDireita from '../../../../../main/assets/icons/small/seta direita.svg';
+import setaEsquerda from '../../../../../main/assets/icons/small/seta esquerda.svg';
+import textIcon from '../../../../../main/assets/icons/small/Texto.svg';
 
 export interface CarouselItem {
   type: 'video' | 'text';
@@ -20,9 +20,8 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
 
   const handlePrevClick = () => {
     if (carouselRef.current) {
-      console.log('Previous button clicked');
       carouselRef.current.scrollBy({
-        left: -carouselRef.current.clientWidth,
+        left: -carouselRef.current.clientWidth / 3, // Ajuste o valor conforme necessário
         behavior: 'smooth',
       });
     }
@@ -30,9 +29,8 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
 
   const handleNextClick = () => {
     if (carouselRef.current) {
-      console.log('Next button clicked');
       carouselRef.current.scrollBy({
-        left: carouselRef.current.clientWidth,
+        left: carouselRef.current.clientWidth / 3, // Ajuste o valor conforme necessário
         behavior: 'smooth',
       });
     }

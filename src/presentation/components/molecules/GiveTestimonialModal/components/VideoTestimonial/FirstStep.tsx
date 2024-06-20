@@ -1,6 +1,6 @@
-import Play from '../../../../../../main/assets/icons/small/Play-video.png';
-import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
-import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
+import Play from '../../../../../../main/assets/icons/small/Play-video.svg';
+import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
+import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 import * as C from './styles';
 
 interface FirstStepProps {

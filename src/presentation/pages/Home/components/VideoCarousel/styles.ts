@@ -8,22 +8,28 @@ export const CarouselContainer = styled.div`
   padding: 1rem;
   position: relative;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
-  overflow-x: scroll;
+  overflow-x: hidden;
+  width: 100%; /* Ajustado para ocupar a largura total */
+  max-width: 1200px; /* Limita a largura máxima do carrossel */
 `;
 
 export const ArrowButton = styled.button`
   background: none;
   border: none;
-  font-size: 2rem;
   cursor: pointer;
   color: #4c4039;
-  height: 250px;
+  height: 100%;
   z-index: 2;
   position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Ajusta a largura do botão */
 
   &:first-child {
-    left: 60px;
-
+    left: 0;
     background: linear-gradient(
       to right,
       rgba(228, 171, 87, 1),
@@ -32,7 +38,7 @@ export const ArrowButton = styled.button`
   }
 
   &:last-child {
-    right: 60px;
+    right: 0;
     background: linear-gradient(
       to left,
       rgba(228, 171, 87, 1),
@@ -41,10 +47,16 @@ export const ArrowButton = styled.button`
   }
 `;
 
+export const ArrowIcon = styled.img`
+  width: 28px;
+  height: 45px;
+`;
+
 export const VideoWrapper = styled.div`
   display: flex;
   overflow-x: scroll;
-  width: 90%;
+  width: 100%;
+  gap: 30px;
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
@@ -63,14 +75,6 @@ export const VideoItem = styled.div`
 export const Video = styled.img`
   width: 100%;
   height: 200px;
-`;
-
-export const ArrowIcon = styled.img`
-  margin: 0px;
-  width: 28px;
-  height: 45px;
-
-  color: #5d280d;
 `;
 
 export const TextItem = styled.div`
@@ -92,7 +96,6 @@ export const TextIcon = styled.img`
   position: absolute;
   width: 45px;
   height: 45px;
-  /* Centraliza o ícone sobre a imagem */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
