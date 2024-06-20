@@ -8,9 +8,14 @@ import Texto from '../../../../main/assets/icons/small/Texto.png';
 import FirstStepText from './components/TextTestimonial/FirstStepText';
 import SecondStepText from './components/TextTestimonial/SecondStepText';
 import ThirdStepText from './components/TextTestimonial/ThirdStepText';
+import FourthStepPhoto from './components/TextTestimonial/FourthStepText';
+import FifthStepPhotoConfirm from './components/TextTestimonial/FifthStepText';
 import FirstStep from './components/VideoTestimonial/FirstStep';
 import SecondStep from './components/VideoTestimonial/SecondStep';
 import ThirdStep from './components/VideoTestimonial/ThirdStep';
+import VideoCarousel, {
+  CarouselItem,
+} from '../../../pages/Home/components/VideoCarousel'; // Adicione esta linha
 
 const GiveTestimonialModal = ({
   isOpen,
@@ -26,10 +31,56 @@ const GiveTestimonialModal = ({
     nome: string;
     email: string;
     telefone: string;
+    texto?: string;
+    foto?: string;
   }>({ nome: '', email: '', telefone: '' });
   const [testimonialType, setTestimonialType] = useState<
     'video' | 'text' | null
   >(null);
+  const [carouselItems, setCarouselItems] = useState<CarouselItem[]>([]); // Adicione esta linha
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append('nome', testimonialData.nome);
+    formData.append('email', testimonialData.email);
+    formData.append('telefone', testimonialData.telefone);
+    if (testimonialData.texto) formData.append('texto', testimonialData.texto);
+    if (testimonialData.foto) formData.append('foto', testimonialData.foto);
+
+    try {
+      const response = await fetch('http://localhost:3001/depoimentos', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${errorText}`
+        );
+      }
+
+      const data = await response.json();
+      console.log('Depoimento criado com sucesso:', data);
+
+      // Adicione o novo depoimento ao estado dos itens do carrossel
+      setCarouselItems((prevItems) => [
+        ...prevItems,
+        {
+          type: testimonialData.foto ? 'text' : 'video',
+          content: testimonialData.foto
+            ? testimonialData.texto || ''
+            : testimonialData.videoUrl || '',
+          imageUrl: testimonialData.foto,
+        },
+      ]);
+
+      setCurrentStep(0);
+      onClose && onClose();
+    } catch (error) {
+      console.error('Erro ao criar depoimento:', error);
+    }
+  };
 
   const steps = [
     {
@@ -99,7 +150,7 @@ const GiveTestimonialModal = ({
         <FirstStepText
           onBackClick={() => setCurrentStep(0)}
           onNextClick={(data: any) => {
-            setTestimonialData(data);
+            setTestimonialData((prev) => ({ ...prev, ...data }));
             setCurrentStep(5);
           }}
         />
@@ -118,24 +169,32 @@ const GiveTestimonialModal = ({
         <ThirdStepText
           onBackClick={() => setCurrentStep(5)}
           onSubmit={(texto) => {
-            const finalData = { ...testimonialData, texto };
-            // Enviar dados para a API
-            fetch('http://localhost:3001/depoimentos', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(finalData),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log('Depoimento criado com sucesso:', data);
-                setCurrentStep(0);
-                onClose && onClose();
-              })
-              .catch((error) => {
-                console.error('Erro ao criar depoimento:', error);
-              });
+            setTestimonialData((prev) => ({ ...prev, texto }));
+            setCurrentStep(7);
+          }}
+        />
+      ),
+    },
+    {
+      content: (
+        <FourthStepPhoto
+          onBackClick={() => setCurrentStep(6)}
+          onNextClick={(foto) => {
+            setTestimonialData((prev) => ({ ...prev, foto }));
+            setCurrentStep(8);
+          }}
+        />
+      ),
+    },
+    {
+      content: (
+        <FifthStepPhotoConfirm
+          photo={testimonialData.foto || ''}
+          onRetake={() => setCurrentStep(7)}
+          onConfirm={handleSubmit}
+          onCancel={() => {
+            setTestimonialData((prev) => ({ ...prev, foto: undefined }));
+            setCurrentStep(7);
           }}
         />
       ),
@@ -151,6 +210,7 @@ const GiveTestimonialModal = ({
           <img src={close} alt="Close" />
         </C.CloseButton>
         {steps[currentStep].content}
+        <VideoCarousel items={carouselItems} /> {/* Adicione esta linha */}
       </C.ModalContent>
     </C.ModalOverlay>
   );
