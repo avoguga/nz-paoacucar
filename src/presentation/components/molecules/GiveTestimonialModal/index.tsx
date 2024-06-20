@@ -3,8 +3,8 @@ import { useParams, useLocation } from 'react-router-dom';
 import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
-import Play from '../../../../main/assets/icons/small/Play-video.png';
-import Texto from '../../../../main/assets/icons/small/Texto.png';
+import Play from '../../../../main/assets/icons/small/Play-video.svg';
+import Texto from '../../../../main/assets/icons/small/Texto-marrom.svg';
 import FirstStepText from './components/TextTestimonial/FirstStepText';
 import SecondStepText from './components/TextTestimonial/SecondStepText';
 import ThirdStepText from './components/TextTestimonial/ThirdStepText';
@@ -13,9 +13,6 @@ import FifthStepPhotoConfirm from './components/TextTestimonial/FifthStepText';
 import FirstStep from './components/VideoTestimonial/FirstStep';
 import SecondStep from './components/VideoTestimonial/SecondStep';
 import ThirdStep from './components/VideoTestimonial/ThirdStep';
-import VideoCarousel, {
-  CarouselItem,
-} from '../../../pages/Home/components/VideoCarousel'; // Adicione esta linha
 
 const GiveTestimonialModal = ({
   isOpen,
@@ -37,7 +34,6 @@ const GiveTestimonialModal = ({
   const [testimonialType, setTestimonialType] = useState<
     'video' | 'text' | null
   >(null);
-  const [carouselItems, setCarouselItems] = useState<CarouselItem[]>([]); // Adicione esta linha
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -64,16 +60,6 @@ const GiveTestimonialModal = ({
       console.log('Depoimento criado com sucesso:', data);
 
       // Adicione o novo depoimento ao estado dos itens do carrossel
-      setCarouselItems((prevItems) => [
-        ...prevItems,
-        {
-          type: testimonialData.foto ? 'text' : 'video',
-          content: testimonialData.foto
-            ? testimonialData.texto || ''
-            : testimonialData.videoUrl || '',
-          imageUrl: testimonialData.foto,
-        },
-      ]);
 
       setCurrentStep(0);
       onClose && onClose();
@@ -210,7 +196,6 @@ const GiveTestimonialModal = ({
           <img src={close} alt="Close" />
         </C.CloseButton>
         {steps[currentStep].content}
-        <VideoCarousel items={carouselItems} /> {/* Adicione esta linha */}
       </C.ModalContent>
     </C.ModalOverlay>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { sg } from 'presentation/styles';
 import * as C from './styles';
 import closeIcon from '../../../../main/assets/icons/small/Fechar.svg';
-import confirmIcon from '../../../../main/assets/icons/small/Confirmar.png';
+import confirmIcon from '../../../../main/assets/icons/small/Confirmar.svg';
 
 export const Modal = ({
   isOpen,

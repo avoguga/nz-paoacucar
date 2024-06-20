@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import * as C from './styles';
-import setaDireita from '../../../../../main/assets/icons/small/Seta_direita.png';
-import setaEsquerda from '../../../../../main/assets/icons/small/Seta_esquerda.png';
+import setaDireita from '../../../../../main/assets/icons/small/seta direita.svg';
+import setaEsquerda from '../../../../../main/assets/icons/small/seta esquerda.svg';
 import textIcon from '../../../../../main/assets/icons/small/Texto.svg';
 
 export interface CarouselItem {

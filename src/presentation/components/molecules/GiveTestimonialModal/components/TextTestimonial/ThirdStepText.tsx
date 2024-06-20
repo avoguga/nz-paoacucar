@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
-import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
+import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
+import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 import TextIcon from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
 
 interface ThirdStepTextProps {

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import * as C from './styles';
-import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
-import CameraIcon from '../../../../../../main/assets/icons/small/Foto_1.png';
+import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
+import CameraIcon from '../../../../../../main/assets/icons/small/tirar foto.svg';
 import logo from '../../../../../../main/assets/icons/ant/logo horizontal 150ppi.svg';
 
 interface FourthStepPhotoProps {
