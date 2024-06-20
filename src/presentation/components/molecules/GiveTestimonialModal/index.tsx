@@ -59,8 +59,6 @@ const GiveTestimonialModal = ({
       const data = await response.json();
       console.log('Depoimento criado com sucesso:', data);
 
-      // Adicione o novo depoimento ao estado dos itens do carrossel
-
       setCurrentStep(0);
       onClose && onClose();
     } catch (error) {

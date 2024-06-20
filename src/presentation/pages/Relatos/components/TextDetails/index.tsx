@@ -39,9 +39,7 @@ const TextDetail = () => {
         id: data._id,
         type: data.videoUrl ? 'video' : 'text',
         content: data.texto || data.videoUrl,
-        imageUrl: data.fotoUrl
-          ? `http://localhost:3001${data.fotoUrl}`
-          : image1,
+        imageUrl: data.fotoUrl,
         nome: data.nome,
         comments: data.comentarios || [],
       });

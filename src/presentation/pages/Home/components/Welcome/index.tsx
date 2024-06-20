@@ -11,25 +11,26 @@ import axios from 'axios';
 const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [items, setItems] = useState<CarouselItem[]>([]);
+  const [fetchTrigger, setFetchTrigger] = useState(false); // Estado para controlar mudanças
+
+  const fetchTestimonials = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/depoimentos');
+      const data = response.data.map((depoimento: any) => ({
+        id: depoimento._id,
+        type: depoimento.videoUrl ? 'video' : 'text',
+        content: depoimento.texto || depoimento.videoUrl,
+        imageUrl: depoimento.fotoUrl || image1,
+      }));
+      setItems(data);
+    } catch (error) {
+      console.error('Erro ao buscar depoimentos:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/depoimentos');
-        const data = response.data.map((depoimento: any) => ({
-          id: depoimento._id,
-          type: depoimento.videoUrl ? 'video' : 'text',
-          content: depoimento.texto || depoimento.videoUrl,
-          imageUrl: depoimento.fotoUrl || image1, // Usar uma imagem padrão se não houver foto
-        }));
-        setItems(data);
-      } catch (error) {
-        console.error('Erro ao buscar depoimentos:', error);
-      }
-    };
-
     fetchTestimonials();
-  }, []);
+  }, [fetchTrigger]); // Dependência no fetchTrigger para refazer o fetch
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -37,6 +38,7 @@ const Welcome = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setFetchTrigger(!fetchTrigger); // Alterna o valor do fetchTrigger para refazer o fetch
   };
 
   return (
