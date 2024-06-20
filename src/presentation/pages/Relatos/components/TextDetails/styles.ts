@@ -14,8 +14,8 @@ export const Container = styled.div`
 export const TextProfile = styled.aside`
   display: flex;
   flex-direction: column;
-  height: 90%;
-  justify-content: space-around;
+  height: 50rem;
+  justify-content: space-between;
   align-items: center;
 `;
 export const TextImageGroup = styled.div`
@@ -27,20 +27,21 @@ export const TextImageGroup = styled.div`
 
 export const Logo = styled.img`
   margin-bottom: 15px;
-  width: 330px;
-  height: 330px;
+  width: 344px;
+  height: 317px;
 `;
 
 export const Image = styled.img`
   width: 400px;
   height: 230px;
-  height: auto;
-  display: block;
+  object-fit: cover;
 `;
 
 export const TextIcon = styled.img`
-  width: 180%;
-  height: 50px;
+  width: 95px;
+  height: 76px;
+  margin-left: auto;
+  margin-bottom: 10px;
 `;
 
 export const RelatoContent = styled.div`
@@ -52,7 +53,7 @@ export const RelatoContent = styled.div`
 
 export const VideoPlayer = styled.video`
   width: 100%;
-  max-width: 800px;
+  max-width: 50rem;
 `;
 
 export const TextContent = styled.div`
@@ -61,8 +62,8 @@ export const TextContent = styled.div`
   align-items: center;
   background-color: ${sg.colors.backgroundColors
     .colorBackgroundFieldTextGeneral};
-  width: 800px;
-  height: 800px;
+  width: 50rem;
+  height: 50rem;
   overflow-y: scroll;
 `;
 

@@ -88,8 +88,9 @@ export const TextItem = styled.div`
 `;
 
 export const TextImage = styled.img`
-  max-width: 350px;
-  max-height: 200px;
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
 `;
 
 export const TextIcon = styled.img`

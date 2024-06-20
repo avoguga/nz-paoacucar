@@ -13,7 +13,6 @@ export const Container = styled.div`
 export const TestimonialsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
   width: 100%;
   max-width: 1200px;
 `;
@@ -28,9 +27,10 @@ export const TestimonialCard = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 100%;
-  height: auto;
+  width: 21.875rem;
+  height: 12.5rem;
   display: block;
+  object-fit: cover;
 `;
 
 export const PlayButton = styled.div`

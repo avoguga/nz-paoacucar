@@ -84,7 +84,7 @@ const ReportCard = ({
         isOpen={isModalOpen}
         onClose={closeModal}
         onClickButton={sendComment}
-        testimonialPersonName={comments[0]?.nome || 'Unknown'}
+        testimonialPersonName={content}
       />
     </C.Main>
   );

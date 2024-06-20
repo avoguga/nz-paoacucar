@@ -78,7 +78,7 @@ const TextDetail = () => {
       </C.RelatoContent>
       <ReportCard
         icon={chatIcon}
-        content={depoimento.content}
+        content={depoimento.nome}
         initialComments={depoimento.comments}
         depoimentoId={depoimento.id}
         fetchDepoimento={fetchDepoimento}
