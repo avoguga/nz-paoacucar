@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+
 import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
@@ -13,6 +13,7 @@ import FifthStepPhotoConfirm from './components/TextTestimonial/FifthStepText';
 import FirstStep from './components/VideoTestimonial/FirstStep';
 import SecondStep from './components/VideoTestimonial/SecondStep';
 import ThirdStep from './components/VideoTestimonial/ThirdStep';
+import ConfirmCancelModal from '../ConfirmCancelModal';
 
 const GiveTestimonialModal = ({
   isOpen,
@@ -21,9 +22,8 @@ const GiveTestimonialModal = ({
   isOpen?: boolean;
   onClose?: () => void;
 }) => {
-  const { id } = useParams<{ id: string }>();
-  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [testimonialData, setTestimonialData] = useState<{
     nome: string;
     email: string;
@@ -64,6 +64,21 @@ const GiveTestimonialModal = ({
     } catch (error) {
       console.error('Erro ao criar depoimento:', error);
     }
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmCancel = () => {
+    setTestimonialData({ nome: '', email: '', telefone: '' });
+    setCurrentStep(0);
+    setIsModalOpen(false);
+    onClose && onClose();
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const steps = [
@@ -176,10 +191,7 @@ const GiveTestimonialModal = ({
           photo={testimonialData.foto || ''}
           onRetake={() => setCurrentStep(7)}
           onConfirm={handleSubmit}
-          onCancel={() => {
-            setTestimonialData((prev) => ({ ...prev, foto: undefined }));
-            setCurrentStep(7);
-          }}
+          onCancel={handleCancel}
         />
       ),
     },
@@ -194,6 +206,11 @@ const GiveTestimonialModal = ({
           <img src={close} alt="Close" />
         </C.CloseButton>
         {steps[currentStep].content}
+        <ConfirmCancelModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onConfirm={handleConfirmCancel}
+        />
       </C.ModalContent>
     </C.ModalOverlay>
   );

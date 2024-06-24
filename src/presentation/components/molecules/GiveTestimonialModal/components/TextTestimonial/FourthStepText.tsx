@@ -15,7 +15,6 @@ const FourthStepPhoto: React.FC<FourthStepPhotoProps> = ({
   onNextClick,
 }) => {
   const webcamRef = useRef<Webcam>(null);
-  const [countdown, setCountdown] = useState(5);
   const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
 
   const capturePhoto = () => {
@@ -41,7 +40,7 @@ const FourthStepPhoto: React.FC<FourthStepPhotoProps> = ({
         />
       </C.LogoContainer>
       <C.HeaderCapture>
-        <C.WebcamContainer>
+        <C.PhotoContainer>
           {capturedPhoto ? (
             <C.CapturedImage src={capturedPhoto} alt="Captured Photo" />
           ) : (
@@ -49,30 +48,27 @@ const FourthStepPhoto: React.FC<FourthStepPhotoProps> = ({
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
-              onUserMedia={() => setCountdown(5)}
-              width={1000}
+              width={1200}
               height={1000}
             />
           )}
-
-          <C.ClickImage>
-            <C.TitleCaptureImage>
-              Para complementar o texto, precisamos de uma foto sua.
-              Posicione-se diante da câmera e clique em FOTO. Após pressionar o
-              botão, você terá 5 segundos para se preparar.
-            </C.TitleCaptureImage>
-            <C.CameraButton onClick={capturePhoto}>
-              <img src={CameraIcon} alt="Foto" />
-              <h2>Foto</h2>
-            </C.CameraButton>
-            <C.Button onClick={onBackClick}>
-              <img src={SetaEsquerda} alt="Anterior" />
-              Anterior
-            </C.Button>
-          </C.ClickImage>
-        </C.WebcamContainer>
+        </C.PhotoContainer>
+        <C.ClickImage>
+          <C.TitleCaptureImage>
+            Para complementar o texto, precisamos de uma foto sua. Posicione-se
+            diante da câmera e clique em FOTO. Após pressionar o botão, você
+            terá 5 segundos para se preparar.
+          </C.TitleCaptureImage>
+          <C.CameraButton onClick={capturePhoto}>
+            <img src={CameraIcon} alt="Foto" />
+            <h2>Foto</h2>
+          </C.CameraButton>
+          <C.Button onClick={onBackClick}>
+            <img src={SetaEsquerda} alt="Anterior" />
+            Anterior
+          </C.Button>
+        </C.ClickImage>
       </C.HeaderCapture>
-      <C.FooterText></C.FooterText>
     </C.Container>
   );
 };

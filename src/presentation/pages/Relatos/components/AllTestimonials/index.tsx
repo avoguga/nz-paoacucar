@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as C from './styles';
 import textIcon from '../../../../../main/assets/icons/small/Texto.svg';
@@ -11,12 +12,24 @@ export interface CarouselItem {
   imageUrl?: string;
 }
 
-interface AllTestimonialsProps {
-  items: CarouselItem[];
-}
-
-const AllTestimonials: React.FC<AllTestimonialsProps> = ({ items }) => {
+const AllTestimonials: React.FC = () => {
+  const [items, setItems] = useState<CarouselItem[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/depoimentos')
+      .then((response) => {
+        const testimonials = response.data.map((item: any) => ({
+          id: item._id,
+          type: item.videoUrl ? 'video' : 'text',
+          content: item.texto,
+          imageUrl: item.fotoUrl,
+        }));
+        setItems(testimonials);
+      })
+      .catch((error) => console.error('Erro ao buscar depoimentos:', error));
+  }, []);
 
   const handleCardClick = (item: CarouselItem) => {
     if (item.type === 'video') {

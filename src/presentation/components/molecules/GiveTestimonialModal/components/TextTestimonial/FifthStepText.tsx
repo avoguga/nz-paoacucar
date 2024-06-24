@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as C from './styles';
-import ConfirmIcon from '../../../../../../main/assets/icons/small/Confirmar.png';
-import RetakeIcon from '../../../../../../main/assets/icons/small/Regravar-Outra_foto.png';
+import ConfirmIcon from '../../../../../../main/assets/icons/small/Confirmar.svg';
+import RetakeIcon from '../../../../../../main/assets/icons/small/regravar.svg';
 import CancelIcon from '../../../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../../../main/assets/icons/ant/logo horizontal 150ppi.svg';
+import ConfirmCancelModal from '../../../ConfirmCancelModal';
 
 interface FifthStepPhotoConfirmProps {
   photo: string;
@@ -18,6 +19,21 @@ const FifthStepPhotoConfirm: React.FC<FifthStepPhotoConfirmProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCancelClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmCancel = () => {
+    setIsModalOpen(false);
+    onCancel();
+  };
+
   return (
     <C.Container>
       <C.LogoContainer>
@@ -51,12 +67,17 @@ const FifthStepPhotoConfirm: React.FC<FifthStepPhotoConfirmProps> = ({
             <img src={RetakeIcon} alt="Tirar outra foto" />
             <h2>Tirar outra foto</h2>
           </C.FiveStepButton>
-          <C.FiveStepButton onClick={onCancel}>
+          <C.FiveStepButton onClick={handleCancelClick}>
             <img src={CancelIcon} alt="Cancelar" />
             <h2>Cancelar</h2>
           </C.FiveStepButton>
         </C.FiveStepGroup>
       </C.HeaderCapture>
+      <ConfirmCancelModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmCancel}
+      />
     </C.Container>
   );
 };

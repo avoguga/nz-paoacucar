@@ -3,7 +3,7 @@ import * as C from './styles';
 import { sg } from 'presentation/styles';
 
 import logo from '../../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
-import HomeIcon from '../../../../../main/assets/icons/small/Inicio.svg';
+import HomeIcon from '../../../../../main/assets/icons/small/inicio.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
@@ -13,9 +13,7 @@ const Header = () => {
       <C.Logo src={logo} alt="logo da casa de cultura e pão de açúcar" />
       <Button
         backgroundColor={sg.colors.backgroundColors.colorBackgroundButtonTwo}
-        onClick={() => {
-          console.log('oi');
-        }}
+        onClick={() => navigate('/')}
         title="Galeria de depoimentos"
         style={{
           fontWeight: 'bold',
