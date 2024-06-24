@@ -1,6 +1,5 @@
 import VideoRecorder from 'presentation/components/molecules/VideoRecorder';
-import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
-import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
+
 import * as C from './styles';
 
 interface ThirdStepProps {
@@ -8,7 +7,7 @@ interface ThirdStepProps {
   onNextClick: () => void;
 }
 
-const ThirdStep = ({ onBackClick, onNextClick }: ThirdStepProps) => {
+const ThirdStep = ({ onBackClick }: ThirdStepProps) => {
   return (
     <C.Container>
       <C.VideoSection>

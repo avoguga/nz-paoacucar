@@ -3,7 +3,6 @@ import logo from '../../../../../main/assets/icons/ant/logo vertical 300ppi.svg'
 import Button from 'presentation/components/atoms/Button';
 import { sg } from 'presentation/styles';
 import VideoCarousel, { CarouselItem } from '../VideoCarousel';
-import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
 import { useState, useEffect } from 'react';
 import GiveTestimonialModal from 'presentation/components/molecules/GiveTestimonialModal';
 import axios from 'axios';
@@ -20,7 +19,7 @@ const Welcome = () => {
         id: depoimento._id,
         type: depoimento.videoUrl ? 'video' : 'text',
         content: depoimento.texto || depoimento.videoUrl,
-        imageUrl: depoimento.fotoUrl || image1,
+        imageUrl: depoimento.fotoUrl,
       }));
       setItems(data);
     } catch (error) {

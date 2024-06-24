@@ -5,8 +5,8 @@ import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 
 interface FirstStepTextProps {
-  onBackClick: () => void;
-  onNextClick: (data: {
+  onBackClick?: () => void;
+  onNextClick?: (data: {
     nome: string;
     email: string;
     telefone: string;

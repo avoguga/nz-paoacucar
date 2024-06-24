@@ -228,16 +228,16 @@ export const PhotoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200%;
-
-  background-color: #fff;
+  width: 150%;
+  height: 672px;
 
   overflow: hidden;
 `;
 
 export const CapturedImage = styled.img`
-  width: 100%;
+  width: 150%;
   height: 672px;
+  background-color: aliceblue;
 `;
 export const FiveStepGroup = styled.div`
   display: flex;
