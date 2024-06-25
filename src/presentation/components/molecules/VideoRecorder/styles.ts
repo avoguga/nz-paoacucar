@@ -15,6 +15,11 @@ export const Instructions = styled.div`
   margin-bottom: 20px;
   color: #5d280d;
 
+  h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
   h3 {
     width: 450px;
 
@@ -49,15 +54,26 @@ export const Controls = styled.div`
   gap: 20px;
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 30px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
   align-items: center;
   color: #5d280d;
+  gap: 20px;
 
   span {
     font-size: 24px;
     font-weight: bold;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
   }
 `;
 

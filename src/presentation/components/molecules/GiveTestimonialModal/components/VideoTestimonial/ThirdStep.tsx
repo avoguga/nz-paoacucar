@@ -7,9 +7,15 @@ interface ThirdStepProps {
   onNextClick?: () => void;
   onConfirm: () => void;
   onStop: (video: any) => void;
+  onCancel: () => void;
 }
 
-const ThirdStep = ({ onBackClick, onConfirm, onStop }: ThirdStepProps) => {
+const ThirdStep = ({
+  onBackClick,
+  onConfirm,
+  onStop,
+  onCancel,
+}: ThirdStepProps) => {
   return (
     <C.Container>
       <C.VideoSection>
@@ -19,6 +25,7 @@ const ThirdStep = ({ onBackClick, onConfirm, onStop }: ThirdStepProps) => {
           onStop={(video: any) => {
             onStop(video);
           }}
+          onCancel={onCancel}
         />
 
         {/* <C.NavButton onClick={onNextClick}>

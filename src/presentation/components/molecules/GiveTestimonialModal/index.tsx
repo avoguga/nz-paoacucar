@@ -168,6 +168,7 @@ const GiveTestimonialModal = ({
           }}
           onBackClick={() => setCurrentStep(2)}
           onNextClick={() => setCurrentStep(4)}
+          onCancel={handleCancel}
         />
       ),
     },
