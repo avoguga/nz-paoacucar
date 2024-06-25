@@ -7,7 +7,7 @@ export const Container = styled.div`
   border-radius: 8px;
   margin-bottom: 20px;
   width: 445px;
-  height: 720px;
+  height: 730px;
   overflow-y: auto;
 `;
 

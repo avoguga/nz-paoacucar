@@ -4,11 +4,13 @@ import * as C from './styles';
 import setaDireita from '../../../../../main/assets/icons/small/seta direita.svg';
 import setaEsquerda from '../../../../../main/assets/icons/small/seta esquerda.svg';
 import textIcon from '../../../../../main/assets/icons/small/Texto.svg';
+import videoIcon from '../../../../../main/assets/icons/small/video branco.svg';
 
 export interface CarouselItem {
   type: 'video' | 'text';
   content: string;
   imageUrl?: string;
+  videoUrl?: string;
 }
 
 interface VideoCarouselProps {
@@ -56,7 +58,10 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
         {items.map((item, index) => (
           <C.VideoItem key={index} onClick={handleClick}>
             {item.type === 'video' ? (
-              <C.Video src={item.content} />
+              <C.TextItem>
+                <C.Video src={item.videoUrl} controls={false} />
+                <C.VideoIcon src={videoIcon} alt="Ícone de Texto" />
+              </C.TextItem>
             ) : (
               <C.TextItem>
                 <C.TextImage src={item.imageUrl} alt="Texto Relato" />

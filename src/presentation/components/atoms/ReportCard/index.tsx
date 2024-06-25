@@ -13,6 +13,7 @@ const ReportCard = ({
   initialComments,
   depoimentoId,
   fetchDepoimento,
+  closeButton,
 }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -51,9 +52,12 @@ const ReportCard = ({
 
   return (
     <C.Main>
-      <C.CloseButton onClick={() => navigate('/relatos')}>
-        <img src={close} alt="Close" />
-      </C.CloseButton>
+      {closeButton ? (
+        <C.CloseButton onClick={() => navigate('/relatos')}>
+          <img src={close} alt="Close" />
+        </C.CloseButton>
+      ) : null}
+
       <C.Container>
         <C.Profile>
           <C.Icon src={icon} alt="Icon" />

@@ -15,4 +15,8 @@ export const ROUTES = Object.freeze({
     path: () => p('/relato/text/:id'), // Parâmetro dinâmico `id`
     page: () => <PAGES.TextDetails />,
   },
+  video_detail: {
+    path: () => p('/relato/video/:id'), // Parâmetro dinâmico `id`
+    page: () => <PAGES.VideoDetails />,
+  },
 });

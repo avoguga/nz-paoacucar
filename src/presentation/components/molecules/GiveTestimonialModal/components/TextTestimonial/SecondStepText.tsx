@@ -6,15 +6,16 @@ import * as C from './styles';
 interface SecondStepProps {
   onBackClick: () => void;
   onNextClick: () => void;
+  nome: string;
 }
 
-const SecondStep = ({ onBackClick, onNextClick }: SecondStepProps) => {
+const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
   return (
     <C.Container>
       <C.Header>
         <img src={Text} alt="video" />
         <C.TitleMsg>
-          Olá Nome, Estamos prestes a começar. Antes disso, precisamos da sua
+          Olá {nome}, Estamos prestes a começar. Antes disso, precisamos da sua
           autorização para que o museu utilize sua imagem.
         </C.TitleMsg>
       </C.Header>

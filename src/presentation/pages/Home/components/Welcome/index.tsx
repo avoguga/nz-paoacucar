@@ -18,8 +18,9 @@ const Welcome = () => {
       const data = response.data.map((depoimento: any) => ({
         id: depoimento._id,
         type: depoimento.videoUrl ? 'video' : 'text',
-        content: depoimento.texto || depoimento.videoUrl,
+        content: depoimento.texto,
         imageUrl: depoimento.fotoUrl,
+        videoUrl: depoimento.videoUrl,
       }));
       setItems(data);
     } catch (error) {

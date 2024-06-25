@@ -33,6 +33,13 @@ export const Image = styled.img`
   object-fit: cover;
 `;
 
+export const Video = styled.video`
+  width: 21.875rem;
+  height: 12.5rem;
+  display: block;
+  object-fit: cover;
+`;
+
 export const PlayButton = styled.div`
   position: absolute;
   top: 50%;

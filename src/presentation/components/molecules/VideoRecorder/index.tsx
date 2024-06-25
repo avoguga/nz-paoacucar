@@ -10,7 +10,7 @@ import * as C from './styles';
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
 
-const VideoRecorder = ({ onBackClick }) => {
+const VideoRecorder = ({ onBackClick, onConfirm, onStop }) => {
   const [permission, setPermission] = useState(false);
   const mediaRecorder = useRef(null);
   const liveVideoFeed = useRef(null);
@@ -19,6 +19,7 @@ const VideoRecorder = ({ onBackClick }) => {
   const [recordedVideo, setRecordedVideo] = useState(null);
   const [videoChunks, setVideoChunks] = useState([]);
   const [showPostRecordOptions, setShowPostRecordOptions] = useState(false);
+  const [recordTime, setRecordTime] = useState(0);
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
@@ -65,21 +66,35 @@ const VideoRecorder = ({ onBackClick }) => {
           localVideoChunks.push(event.data);
         }
       };
-      mediaRecorder.current.onstop = () => {
-        const videoBlob = new Blob(localVideoChunks, { type: mimeType });
-        const videoUrl = URL.createObjectURL(videoBlob);
-        setRecordedVideo(videoUrl);
-        setVideoChunks([]);
-        setShowPostRecordOptions(true);
-      };
       setVideoChunks(localVideoChunks);
+      // Iniciar a contagem do tempo de gravação
+      setRecordTime(0);
+      const interval = setInterval(() => {
+        setRecordTime((prevTime) => {
+          if (prevTime < 60) return prevTime + 1;
+          clearInterval(interval);
+          return prevTime;
+        });
+      }, 1000);
     }
   };
 
   const stopRecording = () => {
     if (mediaRecorder.current && recordingStatus === 'recording') {
+      mediaRecorder.current.onstop = () => {
+        const videoBlob = new Blob(videoChunks, { type: mimeType });
+        setRecordedVideo(URL.createObjectURL(videoBlob));
+        setVideoChunks([]);
+        setShowPostRecordOptions(true);
+        setRecordingStatus('inactive');
+
+        if (onStop) {
+          console.log(videoBlob);
+          onStop(videoBlob);
+        }
+      };
+
       mediaRecorder.current.stop();
-      setRecordingStatus('inactive');
     }
   };
 
@@ -101,6 +116,7 @@ const VideoRecorder = ({ onBackClick }) => {
   const confirmVideo = () => {
     console.log('Video confirmed:', recordedVideo);
     setShowPostRecordOptions(false);
+    onConfirm();
   };
 
   return (
@@ -165,31 +181,29 @@ const VideoRecorder = ({ onBackClick }) => {
               </C.ButtonContainer>
             </>
           )}
-          {showPostRecordOptions && (
-            <>
-              <C.ButtonContainer>
-                <C.Button onClick={confirmVideo} type="button">
-                  <img src={Confirmar} alt="Confirmar" />
-                </C.Button>
-                <span>Confirmar</span>
-              </C.ButtonContainer>
-              <C.ButtonContainer>
-                <C.Button onClick={reRecord} type="button">
-                  <img src={ReGravar} alt="Regravar" />
-                </C.Button>
-                <span>Regravar</span>
-              </C.ButtonContainer>
-              <C.ButtonContainer>
-                <C.Button
-                  onClick={() => setShowPostRecordOptions(false)}
-                  type="button"
-                >
-                  <img src={Cancelar} alt="Cancelar" />
-                </C.Button>
-                <span>Cancelar</span>
-              </C.ButtonContainer>
-            </>
-          )}
+          <>
+            <C.ButtonContainer>
+              <C.Button onClick={confirmVideo} type="button">
+                <img src={Confirmar} alt="Confirmar" />
+              </C.Button>
+              <span>Confirmar</span>
+            </C.ButtonContainer>
+            <C.ButtonContainer>
+              <C.Button onClick={reRecord} type="button">
+                <img src={ReGravar} alt="Regravar" />
+              </C.Button>
+              <span>Regravar</span>
+            </C.ButtonContainer>
+            <C.ButtonContainer>
+              <C.Button
+                onClick={() => setShowPostRecordOptions(false)}
+                type="button"
+              >
+                <img src={Cancelar} alt="Cancelar" />
+              </C.Button>
+              <span>Cancelar</span>
+            </C.ButtonContainer>
+          </>
         </C.Controls>
         <C.NavButton onClick={onBackClick}>
           <img src={SetaEsquerda} alt="Anterior" />

@@ -3,7 +3,7 @@ import * as C from './styles';
 import { sg } from 'presentation/styles';
 
 import logo from '../../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
-import HomeIcon from '../../../../../main/assets/icons/small/inicio.svg';
+import HomeIcon from '../../../../../main/assets/icons/small/Inicio.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
@@ -23,12 +23,12 @@ const Header = () => {
         height="3rem"
       >
         Galeria de depoimentos
-      </Button>{' '}
+      </Button>
       <C.HomeIcon>
         <button onClick={() => navigate('/')} style={{ background: 'none' }}>
           <img src={HomeIcon} alt="" />
         </button>
-        <h3>início</h3>
+        <h3>INÍCIO</h3>
       </C.HomeIcon>
     </C.HeaderContainer>
   );

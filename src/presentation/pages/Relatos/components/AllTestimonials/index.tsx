@@ -10,6 +10,7 @@ export interface CarouselItem {
   type: 'video' | 'text';
   content: string;
   imageUrl?: string;
+  videoUrl?: string;
 }
 
 const AllTestimonials: React.FC = () => {
@@ -25,6 +26,7 @@ const AllTestimonials: React.FC = () => {
           type: item.videoUrl ? 'video' : 'text',
           content: item.texto,
           imageUrl: item.fotoUrl,
+          videoUrl: item.videoUrl,
         }));
         setItems(testimonials);
       })
@@ -34,7 +36,7 @@ const AllTestimonials: React.FC = () => {
   const handleCardClick = (item: CarouselItem) => {
     if (item.type === 'video') {
       navigate(`/relato/video/${item.id}`, {
-        state: { imageUrl: item.imageUrl },
+        state: { videoUrl: item.videoUrl },
       });
     } else {
       navigate(`/relato/text/${item.id}`, {
@@ -49,7 +51,7 @@ const AllTestimonials: React.FC = () => {
         <C.TestimonialCard key={index} onClick={() => handleCardClick(item)}>
           {item.type === 'video' ? (
             <>
-              <C.Image src={item.imageUrl} alt="Video Thumbnail" />
+              <C.Video src={item.videoUrl} controls={false} />
               <C.TextIcon>
                 <img src={videoIcon} alt="" />
               </C.TextIcon>

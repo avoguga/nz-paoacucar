@@ -4,14 +4,22 @@ import * as C from './styles';
 
 interface ThirdStepProps {
   onBackClick: () => void;
-  onNextClick: () => void;
+  onNextClick?: () => void;
+  onConfirm: () => void;
+  onStop: (video: any) => void;
 }
 
-const ThirdStep = ({ onBackClick }: ThirdStepProps) => {
+const ThirdStep = ({ onBackClick, onConfirm, onStop }: ThirdStepProps) => {
   return (
     <C.Container>
       <C.VideoSection>
-        <VideoRecorder onBackClick={onBackClick} />
+        <VideoRecorder
+          onBackClick={onBackClick}
+          onConfirm={onConfirm}
+          onStop={(video: any) => {
+            onStop(video);
+          }}
+        />
 
         {/* <C.NavButton onClick={onNextClick}>
             Próximo

@@ -72,9 +72,10 @@ export const VideoItem = styled.div`
   position: relative;
 `;
 
-export const Video = styled.img`
-  width: 100%;
+export const Video = styled.video`
+  width: 350px;
   height: 200px;
+  object-fit: cover;
 `;
 
 export const TextItem = styled.div`
@@ -94,6 +95,16 @@ export const TextImage = styled.img`
 `;
 
 export const TextIcon = styled.img`
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffff;
+`;
+
+export const VideoIcon = styled.img`
   position: absolute;
   width: 45px;
   height: 45px;

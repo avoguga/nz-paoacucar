@@ -30,10 +30,21 @@ const GiveTestimonialModal = ({
     telefone: string;
     texto?: string;
     foto?: string;
+    video?: Blob;
   }>({ nome: '', email: '', telefone: '' });
   const [testimonialType, setTestimonialType] = useState<
     'video' | 'text' | null
   >(null);
+
+  const convertBase64ToBlob = (base64, mimeType) => {
+    const byteString = atob(base64.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeType });
+  };
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -41,7 +52,15 @@ const GiveTestimonialModal = ({
     formData.append('email', testimonialData.email);
     formData.append('telefone', testimonialData.telefone);
     if (testimonialData.texto) formData.append('texto', testimonialData.texto);
-    if (testimonialData.foto) formData.append('foto', testimonialData.foto);
+    if (testimonialData.foto) {
+      const fotoBlob = convertBase64ToBlob(testimonialData.foto, 'image/jpeg');
+      formData.append('foto', fotoBlob, 'foto.jpg');
+    }
+    if (testimonialData.video) {
+      formData.append('video', testimonialData.video, 'video.mp4');
+    }
+
+    console.log(testimonialData);
 
     try {
       const response = await fetch('http://localhost:3001/depoimentos', {
@@ -124,13 +143,17 @@ const GiveTestimonialModal = ({
       content: (
         <FirstStep
           onBackClick={() => setCurrentStep(0)}
-          onNextClick={() => setCurrentStep(2)}
+          onNextClick={(data: any) => {
+            setTestimonialData((prev) => ({ ...prev, ...data }));
+            setCurrentStep(2);
+          }}
         />
       ),
     },
     {
       content: (
         <SecondStep
+          nome={testimonialData.nome}
           onBackClick={() => setCurrentStep(1)}
           onNextClick={() => setCurrentStep(3)}
         />
@@ -139,6 +162,10 @@ const GiveTestimonialModal = ({
     {
       content: (
         <ThirdStep
+          onConfirm={handleSubmit}
+          onStop={(video: any) => {
+            setTestimonialData((prev) => ({ ...prev, video }));
+          }}
           onBackClick={() => setCurrentStep(2)}
           onNextClick={() => setCurrentStep(4)}
         />
@@ -158,6 +185,7 @@ const GiveTestimonialModal = ({
     {
       content: (
         <SecondStepText
+          nome={testimonialData.nome}
           onBackClick={() => setCurrentStep(4)}
           onNextClick={() => setCurrentStep(6)}
         />

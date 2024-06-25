@@ -1,5 +1,5 @@
+import React from 'react';
 import Play from '../../../../../../main/assets/icons/small/Play-video.svg';
-
 import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 import * as C from './styles';
@@ -7,15 +7,16 @@ import * as C from './styles';
 interface SecondStepProps {
   onBackClick: () => void;
   onNextClick: () => void;
+  nome: string;
 }
 
-const SecondStep = ({ onBackClick, onNextClick }: SecondStepProps) => {
+const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
   return (
     <C.Container>
       <C.Header>
         <img src={Play} alt="video" />
         <C.TitleMsg>
-          Olá Nome, Estamos prestes a começar. Antes disso, precisamos da sua
+          Olá {nome}, estamos prestes a começar. Antes disso, precisamos da sua
           autorização para que o museu utilize sua imagem.
         </C.TitleMsg>
       </C.Header>
@@ -40,11 +41,15 @@ const SecondStep = ({ onBackClick, onNextClick }: SecondStepProps) => {
               padding: '0 10px',
             }}
           >
-            <C.InputLabel
-              value="Eu autorizo o uso da minha imagem"
+            <input
               type="radio"
+              id="imageUseConsent"
+              name="imageConsent"
+              value="Eu autorizo o uso da minha imagem"
             />
-            <label htmlFor="html">Eu autorizo o uso da minha imagem</label>
+            <label htmlFor="imageUseConsent">
+              Eu autorizo o uso da minha imagem
+            </label>
           </div>
         </C.InputContainer>
         <C.Button onClick={onNextClick}>

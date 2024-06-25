@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import * as C from './styles';
 import logo from '../../../../../main/assets/icons/ant/logo vertical 150ppi.svg';
-import textIcon from '../../../../../main/assets/icons/small/Texto-marrom.svg';
+import videoIcon from '../../../../../main/assets/icons/small/video marrom.svg';
 import chatIcon from '../../../../../main/assets/icons/small/conversa.svg';
 import ReportCard from 'presentation/components/atoms/ReportCard';
-import image1 from '../../../../../main/assets/images/background/depoimento-1.webp';
+import close from '../../../../../main/assets/icons/small/Fechar.svg';
 
 interface Comment {
   nome: string;
@@ -17,17 +17,16 @@ interface Comment {
 interface Depoimento {
   id: string;
   type: 'text' | 'video';
-  content: string;
-  imageUrl?: string;
+  videoUrl: string;
   nome: string;
   comments: Comment[];
 }
 
-const TextDetail = () => {
+const VideoDetail = () => {
   const { id } = useParams<{ id: string }>();
-
   const [depoimento, setDepoimento] = useState<Depoimento | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const fetchDepoimento = useCallback(async () => {
     try {
@@ -37,9 +36,8 @@ const TextDetail = () => {
       const data = response.data;
       setDepoimento({
         id: data._id,
-        type: data.videoUrl ? 'video' : 'text',
-        content: data.texto || data.videoUrl,
-        imageUrl: data.fotoUrl,
+        type: 'video',
+        videoUrl: data.videoUrl,
         nome: data.nome,
         comments: data.comentarios || [],
       });
@@ -64,29 +62,32 @@ const TextDetail = () => {
 
   return (
     <C.Container>
-      <C.TextProfile>
-        <C.Logo src={logo} alt="" />
-        <C.TextImageGroup>
-          <C.TextIcon src={textIcon} alt="" />
-          <C.Image src={depoimento.imageUrl} alt="Text Thumbnail" />
+      <C.HeaderContainer>
+        <C.Logo src={logo} alt="Logo" />
+
+        <C.CloseButton onClick={() => navigate('/relatos')}>
+          <img src={close} alt="Close" />
+        </C.CloseButton>
+      </C.HeaderContainer>
+
+      <C.Content>
+        <C.RelatoContent>
+          <C.VideoPlayer controls src={depoimento.videoUrl}>
+            Your browser does not support the video tag.
+          </C.VideoPlayer>
           <C.ProfileText>{depoimento.nome}</C.ProfileText>
-        </C.TextImageGroup>
-      </C.TextProfile>
-      <C.RelatoContent>
-        <C.TextContent>
-          <C.Text>{depoimento.content}</C.Text>
-        </C.TextContent>
-      </C.RelatoContent>
-      <ReportCard
-        closeButton={true}
-        icon={chatIcon}
-        content={depoimento.nome}
-        initialComments={depoimento.comments}
-        depoimentoId={depoimento.id}
-        fetchDepoimento={fetchDepoimento}
-      />
+        </C.RelatoContent>
+        <ReportCard
+          closeButton={false}
+          icon={chatIcon}
+          content={depoimento.nome}
+          initialComments={depoimento.comments}
+          depoimentoId={depoimento.id}
+          fetchDepoimento={fetchDepoimento}
+        />
+      </C.Content>
     </C.Container>
   );
 };
 
-export default TextDetail;
+export default VideoDetail;

@@ -34,7 +34,7 @@ const Relatos = () => {
       <br />
       <br />
       <C.TestimonialContent>
-        <AllTestimonials items={testimonials} />
+        <AllTestimonials />
       </C.TestimonialContent>
     </C.Container>
   );
