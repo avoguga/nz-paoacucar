@@ -2,11 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import Play from '../../../../main/assets/icons/small/Graavr.png';
 import Gravando from '../../../../main/assets/icons/small/Gravando.png';
 import Stop from '../../../../main/assets/icons/small/Parar.png';
-import Confirmar from '../../../../main/assets/icons/small/Confirmar.svg';
-import ReGravar from '../../../../main/assets/icons/small/regravar.svg';
-import Cancelar from '../../../../main/assets/icons/small/Fechar.svg';
-import SetaEsquerda from '../../../../main/assets/icons/small/Seta_esquerda.png';
+import SetaEsquerda from '../../../../main/assets/icons/small/seta esquerda.svg';
 import * as C from './styles';
+import PostRecordOptions from './components/PostRecorderOptions';
+import logo from '../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
 
@@ -20,6 +19,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [videoChunks, setVideoChunks] = useState([]);
   const [showPostRecordOptions, setShowPostRecordOptions] = useState(false);
   const [recordTime, setRecordTime] = useState(0);
+  const [progress, setProgress] = useState(0); // New state for progress
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
@@ -54,6 +54,23 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (recordingStatus === 'recording') {
+      const interval = setInterval(() => {
+        setRecordTime((prevTime) => {
+          const newTime = prevTime + 1;
+          setProgress((newTime / 60) * 100); // Update progress
+          if (newTime >= 60) {
+            clearInterval(interval);
+            stopRecording(); // Automatically stop recording after 1 minute
+          }
+          return newTime;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [recordingStatus]);
+
   const startRecording = () => {
     if (stream && recordingStatus === 'inactive') {
       setRecordingStatus('recording');
@@ -67,15 +84,8 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
         }
       };
       setVideoChunks(localVideoChunks);
-      // Iniciar a contagem do tempo de gravação
       setRecordTime(0);
-      const interval = setInterval(() => {
-        setRecordTime((prevTime) => {
-          if (prevTime < 60) return prevTime + 1;
-          clearInterval(interval);
-          return prevTime;
-        });
-      }, 1000);
+      setProgress(0); // Reset progress
     }
   };
 
@@ -137,29 +147,31 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
           <h3>A gravação começou.</h3>
           <p>
             O vídeo pode ter até 1 minuto de duração. Quando terminar, aperte no
-            botão PARAR.
-          </p>
-        </>
-      );
-    } else if (recordedVideo) {
-      return (
-        <>
-          <h2>Agora falta pouco,</h2>
-          <p>
-            Você pode <strong>ASSISTIR</strong> ao vídeo clicando nele, Se
-            desejar descartá-lo e gravar novamente, clique em{' '}
-            <strong>REGRAVAR</strong>. Se estiver satisfeito, clique em{' '}
-            <strong>CONFIRMAR</strong> para exibi-lo imediatamente nos
-            terminais. Para sair, clique em <strong>CANCELAR</strong>.
+            botão <strong>PARAR</strong>.
           </p>
         </>
       );
     }
   };
 
+  // Function to calculate the gradient color based on progress
+  const getProgressBarColor = (progress) => {
+    const yellow = { r: 255, g: 180, b: 0 };
+    const brown = { r: 93, g: 40, b: 13 };
+    const mix = (start, end, percent) =>
+      Math.round(start + ((end - start) * percent) / 100);
+    const r = mix(yellow.r, brown.r, progress);
+    const g = mix(yellow.g, brown.g, progress);
+    const b = mix(yellow.b, brown.b, progress);
+    return `rgb(${r},${g},${b})`;
+  };
+
   return (
     <C.RecorderContainer>
       <C.VideoArea>
+        <C.LogoContainer>
+          <img src={logo} alt="Logo" />
+        </C.LogoContainer>
         {!recordedVideo ? (
           <video
             ref={liveVideoFeed}
@@ -213,29 +225,25 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
               </C.ButtonContainer>
             </>
           )}
-          {recordedVideo && recordingStatus !== 'recording' && (
-            <C.ButtonGroup>
-              <C.ButtonContainer>
-                <C.Button onClick={confirmVideo} type="button">
-                  <img src={Confirmar} alt="Confirmar" />
-                </C.Button>
-                <span>Confirmar</span>
-              </C.ButtonContainer>
-              <C.ButtonContainer>
-                <C.Button onClick={reRecord} type="button">
-                  <img src={ReGravar} alt="Regravar" />
-                </C.Button>
-                <span>Regravar</span>
-              </C.ButtonContainer>
-              <C.ButtonContainer>
-                <C.Button onClick={onCancel} type="button">
-                  <img src={Cancelar} alt="Cancelar" />
-                </C.Button>
-                <span>Cancelar</span>
-              </C.ButtonContainer>
-            </C.ButtonGroup>
-          )}
         </C.Controls>
+        {showPostRecordOptions && (
+          <PostRecordOptions
+            onConfirm={confirmVideo}
+            onReRecord={reRecord}
+            onCancel={onCancel}
+          />
+        )}
+        <C.ProgressContainer>
+          <C.ProgressBar
+            style={{
+              width: `${progress}%`,
+              backgroundColor: getProgressBarColor(progress),
+            }}
+          />
+          <C.ProgressTime>
+            {recordTime < 10 ? `00:0${recordTime}` : `00:${recordTime}`}
+          </C.ProgressTime>
+        </C.ProgressContainer>
         {recordingStatus === 'inactive' && !recordedVideo && (
           <C.NavButton onClick={onBackClick}>
             <img src={SetaEsquerda} alt="Anterior" />

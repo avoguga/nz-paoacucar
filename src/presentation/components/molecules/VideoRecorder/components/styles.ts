@@ -50,19 +50,6 @@ export const VideoArea = styled.div`
   }
 `;
 
-export const LogoContainer = styled.div`
-  position: absolute;
-  top: 80px;
-  left: 17%;
-  transform: translateX(-50%);
-  z-index: 1;
-
-  img {
-    width: 420px;
-    height: 93px; // Ajuste o tamanho conforme necessário
-  }
-`;
-
 export const Controls = styled.div`
   display: flex;
   justify-content: center;
@@ -71,10 +58,10 @@ export const Controls = styled.div`
 
 export const ButtonGroup = styled.div`
   display: flex;
-  flex-direction: row; /* Ajustado para linha */
+  flex-direction: column; /* Ajustado para linha */
   justify-content: center; /* Centraliza os botões */
   gap: 30px;
-  flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha, se necessário */
+  /* Permite que os botões quebrem para a próxima linha, se necessário */
 `;
 
 export const ButtonContainer = styled.div`
@@ -104,8 +91,8 @@ export const Button = styled.button`
   font-size: 5rem;
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -140,16 +127,34 @@ export const ProgressContainer = styled.div`
 `;
 
 export const ProgressBar = styled.div`
-  height: 20px;
+  height: 10px;
   background-color: #ffb400; /* Cor inicial amarela */
   flex-grow: 1;
   transition: width 1s ease, background-color 1s ease;
-  margin-left: 30px;
 `;
 
 export const ProgressTime = styled.span`
-  margin-left: 30px;
+  margin-left: 10px;
   color: #5d280d;
   font-size: 20px;
   font-weight: bold;
+`;
+
+export const PostRecordContainer = styled.div`
+  text-align: center;
+  justify-content: baseline;
+  margin-left: 35px;
+  margin-bottom: 20px;
+  color: #5d280d;
+  letter-spacing: 1.49px;
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    width: 480px;
+    font-size: 26px;
+  }
 `;
