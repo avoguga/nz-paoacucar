@@ -69,13 +69,45 @@ export const Footer = styled.div`
 `;
 
 export const InputLabel = styled.input`
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #5d280d;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &::before {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.1s ease-in-out;
+    box-shadow: inset 1em 1em #5d280d; /* Cor marrom */
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+`;
+
+export const RadioContainer = styled.div`
+  display: flex;
+  align-items: center;
   background-color: #f9b515;
-  width: 20px;
-  font-size: 26px;
-  height: 39px;
-  text-align: center;
-  ::placeholder {
-    color: #b07600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  gap: 10px;
+
+  label {
+    font-size: 18px;
+    color: ${sg.colors.textColors.colorTextDefault};
   }
 `;
 

@@ -41,15 +41,13 @@ const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
               padding: '0 10px',
             }}
           >
-            <input
-              type="radio"
-              id="imageUseConsent"
-              name="imageConsent"
-              value="Eu autorizo o uso da minha imagem"
-            />
-            <label htmlFor="imageUseConsent">
-              Eu autorizo o uso da minha imagem
-            </label>
+            <C.RadioContainer>
+              <C.InputLabel
+                value="Eu autorizo o uso da minha imagem"
+                type="radio"
+              />
+              <label htmlFor="html">Eu autorizo o uso da minha imagem</label>
+            </C.RadioContainer>
           </div>
         </C.InputContainer>
         <C.Button onClick={onNextClick}>
