@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
@@ -14,6 +13,7 @@ import FirstStep from './components/VideoTestimonial/FirstStep';
 import SecondStep from './components/VideoTestimonial/SecondStep';
 import ThirdStep from './components/VideoTestimonial/ThirdStep';
 import ConfirmCancelModal from '../ConfirmCancelModal';
+import SixStepText from './components/TextTestimonial/SixStepText';
 
 const GiveTestimonialModal = ({
   isOpen,
@@ -59,8 +59,6 @@ const GiveTestimonialModal = ({
     if (testimonialData.video) {
       formData.append('video', testimonialData.video, 'video.mp4');
     }
-
-    console.log(testimonialData);
 
     try {
       const response = await fetch('http://localhost:3001/depoimentos', {
@@ -219,10 +217,13 @@ const GiveTestimonialModal = ({
         <FifthStepPhotoConfirm
           photo={testimonialData.foto || ''}
           onRetake={() => setCurrentStep(7)}
-          onConfirm={handleSubmit}
+          onConfirm={() => setCurrentStep(9)} // Avançar para a sexta etapa
           onCancel={handleCancel}
         />
       ),
+    },
+    {
+      content: <SixStepText onClose={onClose} />, // Passando onClose para SixStepText
     },
   ];
 
