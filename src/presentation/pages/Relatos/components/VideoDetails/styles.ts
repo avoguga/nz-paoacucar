@@ -43,8 +43,8 @@ export const TextImageGroup = styled.div`
 
 export const Logo = styled.img`
   margin-bottom: 15px;
-  width: 344px;
-  height: 317px;
+  width: 420px;
+  height: 90px;
 `;
 
 export const RelatoContent = styled.div`

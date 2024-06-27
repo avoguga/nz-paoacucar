@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import * as C from './styles';
-import logo from '../../../../../main/assets/icons/ant/logo vertical 150ppi.svg';
+import logo from '../../../../../main/assets/icons/ant/logo horizontal 150ppi.svg';
 import videoIcon from '../../../../../main/assets/icons/small/video marrom.svg';
 import chatIcon from '../../../../../main/assets/icons/small/conversa.svg';
 import ReportCard from 'presentation/components/atoms/ReportCard';
