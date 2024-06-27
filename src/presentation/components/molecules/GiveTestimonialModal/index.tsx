@@ -217,7 +217,10 @@ const GiveTestimonialModal = ({
         <FifthStepPhotoConfirm
           photo={testimonialData.foto || ''}
           onRetake={() => setCurrentStep(7)}
-          onConfirm={() => setCurrentStep(9)} // Avançar para a sexta etapa
+          onConfirm={() => {
+            handleSubmit();
+            setCurrentStep(9);
+          }} // Avançar para a sexta etapa
           onCancel={handleCancel}
         />
       ),
