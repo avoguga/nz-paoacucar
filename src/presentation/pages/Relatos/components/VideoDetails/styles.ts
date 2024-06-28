@@ -65,7 +65,7 @@ export const VideoWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 45.625rem;
-  background-color: rgba(139, 69, 19, 0.7); /* cor marrom translúcida */
+  background-color: rgba(139, 69, 19, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +133,7 @@ export const VolumeSlider = styled.input.attrs<SliderProps>({
   -webkit-appearance: none;
   appearance: none;
   width: 100px;
-  height: 8px;
+  height: 20px;
   background: ${(props) =>
     `linear-gradient(to right, #FFD600 ${props.value * 100}%, #5D280D ${
       props.value * 100
@@ -170,10 +170,9 @@ export const ProgressBar = styled.input.attrs<SliderProps>({
   position: absolute;
   -webkit-appearance: none;
   appearance: none;
-  width: calc(100% - 20px);
-  height: 8px;
-  bottom: 10px;
-  left: 10px;
+  width: 100%;
+  height: 20px;
+  bottom: 0px;
   background: ${(props) =>
     `linear-gradient(to right, #FFD600 ${props.value}%, #5D280D ${props.value}%)`};
   cursor: pointer;
