@@ -24,6 +24,22 @@
     </style>
 
     <title>Museu de Arte e Cultura - Pao de Açúcar</title>
+
+    <script>
+      function ajustarZoomParaResolucaoDesejada() {
+        const larguraDesejada = 1920;
+        const alturaDesejada = 1080;
+        const larguraAtual = window.innerWidth;
+        const alturaAtual = window.innerHeight;
+        const fatorZoomHorizontal = larguraAtual / larguraDesejada;
+        const fatorZoomVertical = alturaAtual / alturaDesejada;
+        const fatorZoom = Math.min(fatorZoomHorizontal, fatorZoomVertical);
+        document.body.style.zoom = `${fatorZoom * 100}%`;
+      }
+
+      window.onload = ajustarZoomParaResolucaoDesejada;
+      window.onresize = ajustarZoomParaResolucaoDesejada;
+    </script>
   </head>
   <body>
     <div id="root"></div>
