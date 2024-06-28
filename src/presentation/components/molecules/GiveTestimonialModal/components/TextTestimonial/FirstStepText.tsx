@@ -3,6 +3,7 @@ import * as C from './styles';
 import Text from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
 import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
+import ErrorModal from '../../../../atoms/ErrorModal';
 
 interface FirstStepTextProps {
   onBackClick?: () => void;
@@ -20,14 +21,34 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleNextClick = () => {
-    const depoimentoData = {
-      nome,
-      email,
-      telefone,
-    };
-    onNextClick(depoimentoData);
+    const newErrors: string[] = [];
+
+    if (!nome) {
+      newErrors.push('Nome é obrigatório');
+    }
+    if (!email) {
+      newErrors.push('E-mail é obrigatório');
+    }
+    if (!telefone) {
+      newErrors.push('Telefone é obrigatório');
+    }
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      setIsModalOpen(true);
+    } else {
+      setErrors([]);
+      const depoimentoData = {
+        nome,
+        email,
+        telefone,
+      };
+      onNextClick && onNextClick(depoimentoData);
+    }
   };
 
   return (
@@ -71,6 +92,11 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
           <img src={SetaDireita} alt="Próximo" />
         </C.Button>
       </C.Footer>
+      <ErrorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        messages={errors}
+      />
     </C.Container>
   );
 };

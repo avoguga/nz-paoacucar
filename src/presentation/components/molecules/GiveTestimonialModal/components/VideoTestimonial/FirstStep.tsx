@@ -3,6 +3,7 @@ import * as C from './styles';
 import Play from '../../../../../../main/assets/icons/small/Play-video.svg';
 import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
+import ErrorModal from '../../../../atoms/ErrorModal';
 
 interface FirstStepProps {
   onBackClick?: () => void;
@@ -17,14 +18,34 @@ const FirstStep: React.FC<FirstStepProps> = ({ onBackClick, onNextClick }) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleNextClick = () => {
-    const videoData = {
-      nome,
-      email,
-      telefone,
-    };
-    onNextClick(videoData);
+    const newErrors: string[] = [];
+
+    if (!nome) {
+      newErrors.push('Nome é obrigatório');
+    }
+    if (!email) {
+      newErrors.push('E-mail é obrigatório');
+    }
+    if (!telefone) {
+      newErrors.push('Telefone é obrigatório');
+    }
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      setIsModalOpen(true);
+    } else {
+      setErrors([]);
+      const videoData = {
+        nome,
+        email,
+        telefone,
+      };
+      onNextClick && onNextClick(videoData);
+    }
   };
 
   return (
@@ -68,6 +89,11 @@ const FirstStep: React.FC<FirstStepProps> = ({ onBackClick, onNextClick }) => {
           <img src={SetaDireita} alt="Próximo" />
         </C.Button>
       </C.Footer>
+      <ErrorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        messages={errors}
+      />
     </C.Container>
   );
 };

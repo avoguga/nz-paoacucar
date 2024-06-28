@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as C from './styles';
 import textIcon from '../../../../../main/assets/icons/small/Texto.svg';
-import videoIcon from '../../../../../main/assets/icons/small/Play-video.svg';
+import videoIcon from '../../../../../main/assets/icons/small/video branco.svg';
 
 export interface CarouselItem {
   id: number;
@@ -53,14 +53,14 @@ const AllTestimonials: React.FC = () => {
             <>
               <C.Video src={item.videoUrl} controls={false} />
               <C.TextIcon>
-                <img src={videoIcon} alt="" />
+                <img src={videoIcon} alt="Video Thumbnail" />
               </C.TextIcon>
             </>
           ) : (
             <>
               <C.Image src={item.imageUrl} alt="Text Thumbnail" />
               <C.TextIcon>
-                <img src={textIcon} alt="" />
+                <img src={textIcon} alt="Text Thumbnail" />
               </C.TextIcon>
             </>
           )}
