@@ -7,10 +7,11 @@ export const Container = styled.div`
   align-items: center;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
   height: 100%;
+  width: 100%;
   gap: 25px;
   padding: 50px;
-  width: 100%;
 `;
+
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -18,6 +19,8 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   gap: 25px;
   width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
 `;
 
 export const Content = styled.div`
@@ -25,6 +28,9 @@ export const Content = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  gap: 10rem;
+  padding-left: 50px;
+  padding-right: 50px;
 `;
 
 export const TextProfile = styled.aside`
@@ -34,10 +40,10 @@ export const TextProfile = styled.aside`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const TextImageGroup = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 25px;
 `;
 
@@ -48,24 +54,158 @@ export const Logo = styled.img`
 `;
 
 export const RelatoContent = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
 `;
 
-export const VideoPlayer = styled.video`
-  width: 1300px;
-  height: 730px;
+export const VideoWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 45.625rem;
+  background-color: rgba(139, 69, 19, 0.7); /* cor marrom translúcida */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const VideoPlayer = styled.video<{ isPlaying: boolean }>`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+`;
+
+export const Overlay = styled.div<{ isPlaying: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  visibility: ${(props) => (!props.isPlaying ? 'visible' : 'hidden')};
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(93, 40, 13, 0.6);
+`;
+
+export const PlayButton = styled.button`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const VolumeContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+export const VolumeIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+interface SliderProps {
+  value: number;
+}
+
+export const VolumeSlider = styled.input.attrs<SliderProps>({
+  type: 'range',
+})<SliderProps>`
+  margin-left: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 8px;
+  background: ${(props) =>
+    `linear-gradient(to right, #FFD600 ${props.value * 100}%, #5D280D ${
+      props.value * 100
+    }%)`};
+  cursor: pointer;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    width: 0;
+    height: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+
+  &::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+  }
+
+  &::-ms-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+  }
+`;
+
+export const ProgressBar = styled.input.attrs<SliderProps>({
+  type: 'range',
+})<SliderProps>`
+  position: absolute;
+  -webkit-appearance: none;
+  appearance: none;
+  width: calc(100% - 20px);
+  height: 8px;
+  bottom: 10px;
+  left: 10px;
+  background: ${(props) =>
+    `linear-gradient(to right, #FFD600 ${props.value}%, #5D280D ${props.value}%)`};
+  cursor: pointer;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    width: 0;
+    height: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+
+  &::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+  }
+
+  &::-ms-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+  }
 `;
 
 export const ProfileText = styled.h2`
   font-size: 34px;
   color: ${sg.colors.textColors.colorTextDefault};
-
   text-align: left;
-
   font-family: 'myFont', sans-serif;
 `;
 
@@ -76,7 +216,6 @@ export const CloseButton = styled.button`
     height: 30px;
   }
   margin-bottom: 5px;
-  width: 100%;
   display: flex;
   top: 5%;
   right: 9%;
