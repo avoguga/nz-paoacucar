@@ -149,9 +149,31 @@ export const ProgressBar = styled.div`
   margin-left: 30px;
 `;
 
-export const ProgressTime = styled.span`
+export const ProgressTime = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
   margin-left: 30px;
   color: #5d280d;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: bolder;
+
+  // First child
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  // Second child
+  span {
+    font-size: 5rem;
+    margin-left: 0.2rem;
+  }
+
+  // Third child
+  div {
+    font-size: 2rem;
+    margin-left: 1rem;
+    font-weight: bold;
+  }
 `;

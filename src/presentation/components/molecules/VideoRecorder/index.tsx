@@ -6,6 +6,7 @@ import SetaEsquerda from '../../../../main/assets/icons/small/seta esquerda.svg'
 import * as C from './styles';
 import PostRecordOptions from './components/PostRecorderOptions';
 import logo from '../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
+import Tempo from '../../../../main/assets/icons/small/relogio tempo.svg';
 import ProgressBar from '@ramonak/react-progress-bar';
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
@@ -218,7 +219,10 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
           />
         )}
         <C.ProgressContainer>
-          <C.ProgressTime>{recordTime} segundos</C.ProgressTime>
+          <C.ProgressTime>
+            <img src={Tempo} alt="Tempo" />
+            <span>{recordTime}</span> <div>segundos</div>
+          </C.ProgressTime>
           <ProgressBar
             completed={progress}
             bgColor="#5D280D"
