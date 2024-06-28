@@ -6,6 +6,7 @@ import SetaEsquerda from '../../../../main/assets/icons/small/seta esquerda.svg'
 import * as C from './styles';
 import PostRecordOptions from './components/PostRecorderOptions';
 import logo from '../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
+import ProgressBar from '@ramonak/react-progress-bar';
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
 
@@ -19,7 +20,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [videoChunks, setVideoChunks] = useState([]);
   const [showPostRecordOptions, setShowPostRecordOptions] = useState(false);
   const [recordTime, setRecordTime] = useState(0);
-  const [progress, setProgress] = useState(0); // New state for progress
+  const [progress, setProgress] = useState(0);
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
@@ -31,7 +32,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
         setPermission(true);
         setStream(mediaStream);
         liveVideoFeed.current.srcObject = mediaStream;
-        liveVideoFeed.current.muted = true; // Mute the local feedback
+        liveVideoFeed.current.muted = true;
       } catch (err) {
         console.error('Failed to get media stream:', err);
         alert(err.message);
@@ -40,16 +41,15 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
       alert('The MediaRecorder API is not supported in your browser.');
     }
   }
+
   useEffect(() => {
     getCameraPermission();
 
-    // Função de limpeza chamada quando o componente é desmontado
     return () => {
       if (mediaRecorder.current && recordingStatus === 'recording') {
-        mediaRecorder.current.stop(); // Garantir que a gravação pare
+        mediaRecorder.current.stop();
       }
 
-      // Parar todas as faixas do stream
       stream?.getTracks().forEach((track) => track.stop());
     };
   }, []);
@@ -59,10 +59,10 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
       const interval = setInterval(() => {
         setRecordTime((prevTime) => {
           const newTime = prevTime + 1;
-          setProgress((newTime / 60) * 100); // Update progress
+          setProgress((newTime / 60) * 100);
           if (newTime >= 60) {
             clearInterval(interval);
-            stopRecording(); // Automatically stop recording after 1 minute
+            stopRecording();
           }
           return newTime;
         });
@@ -85,12 +85,13 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
       };
       setVideoChunks(localVideoChunks);
       setRecordTime(0);
-      setProgress(0); // Reset progress
+      setProgress(0);
     }
   };
 
   const stopRecording = () => {
     if (mediaRecorder.current && recordingStatus === 'recording') {
+      mediaRecorder.current.stop();
       mediaRecorder.current.onstop = () => {
         const videoBlob = new Blob(videoChunks, { type: mimeType });
         setRecordedVideo(URL.createObjectURL(videoBlob));
@@ -103,23 +104,19 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
           onStop(videoBlob);
         }
       };
-
-      mediaRecorder.current.stop();
     }
   };
 
   const reRecord = () => {
     if (stream) {
-      // Parar o stream existente para reiniciar a câmera
       stream.getTracks().forEach((track) => track.stop());
     }
 
     setRecordedVideo(null);
     setShowPostRecordOptions(false);
     setRecordingStatus('inactive');
-    videoChunks.length = 0; // Limpa os chunks de vídeo antigos
+    videoChunks.length = 0;
 
-    // Reobtém o acesso à câmera
     getCameraPermission();
   };
 
@@ -129,7 +126,6 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
     onConfirm();
   };
 
-  // Dynamic instruction message based on recording status
   const instructionMessage = () => {
     if (!recordedVideo && recordingStatus === 'inactive') {
       return (
@@ -152,18 +148,6 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
         </>
       );
     }
-  };
-
-  // Function to calculate the gradient color based on progress
-  const getProgressBarColor = (progress) => {
-    const yellow = { r: 255, g: 180, b: 0 };
-    const brown = { r: 93, g: 40, b: 13 };
-    const mix = (start, end, percent) =>
-      Math.round(start + ((end - start) * percent) / 100);
-    const r = mix(yellow.r, brown.r, progress);
-    const g = mix(yellow.g, brown.g, progress);
-    const b = mix(yellow.b, brown.b, progress);
-    return `rgb(${r},${g},${b})`;
   };
 
   return (
@@ -234,15 +218,16 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
           />
         )}
         <C.ProgressContainer>
-          <C.ProgressBar
-            style={{
-              width: `${progress}%`,
-              backgroundColor: getProgressBarColor(progress),
-            }}
+          <C.ProgressTime>{recordTime} segundos</C.ProgressTime>
+          <ProgressBar
+            completed={progress}
+            bgColor="#5D280D"
+            borderRadius="0"
+            isLabelVisible={false}
+            baseBgColor="#F9B515"
+            width="430px"
+            height="40px"
           />
-          <C.ProgressTime>
-            {recordTime < 10 ? `00:0${recordTime}` : `00:${recordTime}`}
-          </C.ProgressTime>
         </C.ProgressContainer>
         {recordingStatus === 'inactive' && !recordedVideo && (
           <C.NavButton onClick={onBackClick}>

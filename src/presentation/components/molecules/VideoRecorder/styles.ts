@@ -135,8 +135,10 @@ export const NavButton = styled.button`
 export const ProgressContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  gap: 10px;
 `;
 
 export const ProgressBar = styled.div`
