@@ -36,6 +36,6 @@ export const GlobalStyles = createGlobalStyle`
                         html, body, #root {
                             font-family: 'MinhaFonte', sans-serif;
                             height: 100%;
-        min-height: 100vh;
+        /* min-height: 100vh; */
     }
 `;

@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
-  height: 100vh;
+  height: 100%;
   gap: 25px;
   padding: 20px;
 `;

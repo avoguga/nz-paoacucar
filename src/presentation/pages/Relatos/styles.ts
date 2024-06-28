@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
-  height: 100vh;
+  height: 100%;
   display: flex;
 
   flex-direction: column;

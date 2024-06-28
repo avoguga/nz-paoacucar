@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Logo from '../../../../../../main/assets/icons/ant/logo vertical 150ppi.svg';
-import HomeIcon from '../../../../../../main/assets/icons/small/inicio.svg';
+import HomeIcon from '../../../../../../main/assets/icons/small/Inicio.svg';
 import { sg } from 'presentation/styles';
 
 const Container = styled.div`
@@ -10,7 +10,7 @@ const Container = styled.div`
   align-items: center;
   gap: 100px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
   padding: 20px;
 `;
