@@ -19,7 +19,7 @@ const AllTestimonials: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/depoimentos')
+      .get('http://93.127.210.45:3001/depoimentos')
       .then((response) => {
         const testimonials = response.data.map((item: any) => ({
           id: item._id,

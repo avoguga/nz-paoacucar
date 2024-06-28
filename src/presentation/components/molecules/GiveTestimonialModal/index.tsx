@@ -61,7 +61,7 @@ const GiveTestimonialModal = ({
     }
 
     try {
-      const response = await fetch('http://localhost:3001/depoimentos', {
+      const response = await fetch('http://93.127.210.45:3001/depoimentos', {
         method: 'POST',
         body: formData,
       });

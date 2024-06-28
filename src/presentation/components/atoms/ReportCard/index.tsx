@@ -29,7 +29,7 @@ const ReportCard = ({
   const sendComment = async (newCommentDetails) => {
     try {
       const response = await axios.post(
-        `http://localhost:3001/depoimentos/${depoimentoId}/comentarios`,
+        `http://93.127.210.45:3001/depoimentos/${depoimentoId}/comentarios`,
         newCommentDetails
       );
       const newComment = response.data;

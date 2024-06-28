@@ -36,7 +36,7 @@ const VideoDetail = () => {
   const fetchDepoimento = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/depoimentos/${id}`
+        `http://93.127.210.45:3001/depoimentos/${id}`
       );
       const data = response.data;
       setDepoimento({
