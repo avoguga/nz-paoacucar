@@ -177,7 +177,7 @@ export const TextArea = styled.textarea`
   background-color: ${sg.colors.backgroundColors
     .colorBackgroundFieldTextGeneral};
   &::placeholder {
-    color: ${sg.colors.textColors.colorTextDefault};
+    color: rgba(93, 40, 13, 0.5);
   }
   &:focus {
     box-shadow: 0 0 0 0;
