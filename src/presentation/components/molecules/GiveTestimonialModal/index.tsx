@@ -61,23 +61,33 @@ const GiveTestimonialModal = ({
     }
 
     try {
-      const response = await fetch('http://93.127.210.45:3001/depoimentos', {
-        method: 'POST',
-        body: formData,
-      });
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://93.127.210.45:3001/depoimentos', true);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `HTTP error! status: ${response.status}, message: ${errorText}`
-        );
-      }
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = (event.loaded / event.total) * 100;
+          console.log(`Progresso do upload: ${percentComplete.toFixed(2)}%`);
+        }
+      };
 
-      const data = await response.json();
-      console.log('Depoimento criado com sucesso:', data);
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          const data = JSON.parse(xhr.responseText);
+          console.log('Depoimento criado com sucesso:', data);
 
-      setCurrentStep(0);
-      onClose && onClose();
+          setCurrentStep(0);
+          onClose && onClose();
+        } else {
+          console.error('Erro ao criar depoimento:', xhr.statusText);
+        }
+      };
+
+      xhr.onerror = () => {
+        console.error('Erro ao criar depoimento:', xhr.statusText);
+      };
+
+      xhr.send(formData);
     } catch (error) {
       console.error('Erro ao criar depoimento:', error);
     }

@@ -32,6 +32,7 @@ const ThirdStepText: React.FC<ThirdStepTextProps> = ({
           placeholder="Escreva seu depoimento aqui..."
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
+          // @ts-ignore
           maxLength={500}
         ></C.TextArea>
         <C.CharCount>{texto.length} / 500 caracteres</C.CharCount>

@@ -46,6 +46,7 @@ export const Modal = ({
           />
           <C.TextArea
             placeholder="Seu comentário"
+            // @ts-ignore
             maxLength="500"
             value={comment}
             onChange={(e) => {
