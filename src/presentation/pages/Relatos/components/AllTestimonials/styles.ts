@@ -15,6 +15,7 @@ export const TestimonialsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   max-width: 1200px;
+  gap: 34px;
 `;
 
 export const TestimonialCard = styled.div`

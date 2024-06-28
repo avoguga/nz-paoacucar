@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Logo from '../../../../../../main/assets/icons/ant/logo vertical 150ppi.svg';
-import HomeIcon from '../../../../../../main/assets/icons/small/Inicio.svg';
+import HomeIcon from '../../../../../../main/assets/icons/small/inicio.svg';
 import { sg } from 'presentation/styles';
 
 const Container = styled.div`

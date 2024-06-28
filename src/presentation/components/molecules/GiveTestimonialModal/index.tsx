@@ -160,12 +160,11 @@ const GiveTestimonialModal = ({
     {
       content: (
         <ThirdStep
-          onConfirm={handleSubmit}
+          onBackClick={() => setCurrentStep(2)}
+          onNextClick={() => setCurrentStep(9)} // Avança para a sexta etapa
           onStop={(video: any) => {
             setTestimonialData((prev) => ({ ...prev, video }));
           }}
-          onBackClick={() => setCurrentStep(2)}
-          onNextClick={() => setCurrentStep(4)}
           onCancel={handleCancel}
         />
       ),
@@ -218,15 +217,14 @@ const GiveTestimonialModal = ({
           photo={testimonialData.foto || ''}
           onRetake={() => setCurrentStep(7)}
           onConfirm={() => {
-            handleSubmit();
-            setCurrentStep(9);
-          }} // Avançar para a sexta etapa
+            setCurrentStep(9); // Avança para a sexta etapa
+          }}
           onCancel={handleCancel}
         />
       ),
     },
     {
-      content: <SixStepText onClose={onClose} />, // Passando onClose para SixStepText
+      content: <SixStepText onClose={handleSubmit} />, // Passando handleSubmit para salvar ao confirmar
     },
   ];
 

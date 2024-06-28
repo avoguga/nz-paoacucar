@@ -60,7 +60,7 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
             {item.type === 'video' ? (
               <C.TextItem>
                 <C.Video src={item.videoUrl} controls={false} />
-                <C.VideoIcon src={videoIcon} alt="Ícone de Texto" />
+                <C.VideoIcon src={videoIcon} alt="Ícone de Vídeo" />
               </C.TextItem>
             ) : (
               <C.TextItem>

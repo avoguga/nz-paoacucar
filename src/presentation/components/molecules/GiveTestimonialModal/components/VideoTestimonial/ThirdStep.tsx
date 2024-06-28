@@ -1,18 +1,16 @@
 import VideoRecorder from 'presentation/components/molecules/VideoRecorder';
-
 import * as C from './styles';
 
 interface ThirdStepProps {
   onBackClick: () => void;
-  onNextClick?: () => void;
-  onConfirm: () => void;
+  onNextClick: () => void;
   onStop: (video: any) => void;
   onCancel: () => void;
 }
 
 const ThirdStep = ({
   onBackClick,
-  onConfirm,
+  onNextClick,
   onStop,
   onCancel,
 }: ThirdStepProps) => {
@@ -21,17 +19,12 @@ const ThirdStep = ({
       <C.VideoSection>
         <VideoRecorder
           onBackClick={onBackClick}
-          onConfirm={onConfirm}
+          onConfirm={onNextClick} // Avança para a sexta etapa
           onStop={(video: any) => {
             onStop(video);
           }}
           onCancel={onCancel}
         />
-
-        {/* <C.NavButton onClick={onNextClick}>
-            Próximo
-            <img src={SetaDireita} alt="Próximo" />
-          </C.NavButton> */}
       </C.VideoSection>
     </C.Container>
   );
