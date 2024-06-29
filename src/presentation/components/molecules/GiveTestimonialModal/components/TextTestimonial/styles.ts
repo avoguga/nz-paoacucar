@@ -106,7 +106,7 @@ export const RadioContainer = styled.div`
   gap: 10px;
 
   label {
-    font-size: 18px;
+    font-size: 24px;
     color: ${sg.colors.textColors.colorTextDefault};
   }
 `;

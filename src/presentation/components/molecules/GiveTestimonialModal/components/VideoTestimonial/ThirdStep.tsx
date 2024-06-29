@@ -19,7 +19,7 @@ const ThirdStep = ({
       <C.VideoSection>
         <VideoRecorder
           onBackClick={onBackClick}
-          onConfirm={onNextClick} // Avança para a sexta etapa
+          onConfirm={onNextClick}
           onStop={(video: any) => {
             onStop(video);
           }}

@@ -19,7 +19,7 @@ const AllTestimonials: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://93.127.210.45:3001/depoimentos')
+      .get('http://localhost:3001/depoimentos')
       .then((response) => {
         const testimonials = response.data.map((item: any) => ({
           id: item._id,
@@ -28,7 +28,7 @@ const AllTestimonials: React.FC = () => {
           imageUrl: item.fotoUrl,
           videoUrl: item.videoUrl,
         }));
-        setItems(testimonials);
+        setItems(testimonials.reverse());
       })
       .catch((error) => console.error('Erro ao buscar depoimentos:', error));
   }, []);

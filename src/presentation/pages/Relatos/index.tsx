@@ -12,9 +12,7 @@ const Relatos = () => {
     // Função para buscar os dados da API
     const fetchTestimonials = async () => {
       try {
-        const response = await axios.get(
-          'http://93.127.210.45:3001/depoimentos'
-        );
+        const response = await axios.get('http://localhost:3001/depoimentos');
         const data = response.data.map((depoimento: any) => ({
           id: depoimento._id,
           type: depoimento.videoUrl ? 'video' : 'text',

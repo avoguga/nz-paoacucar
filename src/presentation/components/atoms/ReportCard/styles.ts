@@ -63,7 +63,7 @@ export const HorizontalLine = styled.div`
 `;
 
 export const Comment = styled.div`
-  font-size: 0.875rem;
+  font-size: 1.2rem;
   margin-top: 20px;
   text-align: left;
   display: flex;

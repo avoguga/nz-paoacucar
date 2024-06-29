@@ -101,8 +101,8 @@ export const OptionsButton = styled.button`
   gap: 50px;
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
   }
 `;
 

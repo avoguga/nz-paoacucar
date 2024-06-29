@@ -58,23 +58,25 @@ export const Controls = styled.div`
 
 export const ButtonGroup = styled.div`
   display: flex;
-  flex-direction: column; /* Ajustado para linha */
-  justify-content: center; /* Centraliza os botões */
-  gap: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   /* Permite que os botões quebrem para a próxima linha, se necessário */
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   color: #5d280d;
-  gap: 10px;
-  margin: 10px;
+  gap: 1rem;
+  margin: 1rem;
 
   span {
     font-size: 30px;
     font-weight: bold;
+    cursor: pointer;
   }
 `;
 
@@ -126,35 +128,25 @@ export const ProgressContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const ProgressBar = styled.div`
-  height: 10px;
-  background-color: #ffb400; /* Cor inicial amarela */
-  flex-grow: 1;
-  transition: width 1s ease, background-color 1s ease;
-`;
-
-export const ProgressTime = styled.span`
-  margin-left: 10px;
-  color: #5d280d;
-  font-size: 20px;
-  font-weight: bold;
-`;
-
 export const PostRecordContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  justify-content: baseline;
   margin-left: 35px;
   margin-bottom: 20px;
   color: #5d280d;
   letter-spacing: 1.49px;
+  height: 100%;
 
   h2 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 3rem;
+    margin-bottom: 1rem;
   }
 
   p {
-    width: 480px;
-    font-size: 26px;
+    width: 32.25rem;
+    font-size: 24px;
+    text-align: center;
   }
 `;

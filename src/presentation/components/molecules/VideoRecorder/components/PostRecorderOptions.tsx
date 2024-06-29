@@ -20,19 +20,19 @@ const PostRecordOptions = ({ onConfirm, onReRecord, onCancel }) => {
           <C.Button onClick={onConfirm} type="button">
             <img src={Confirmar} alt="Confirmar" />
           </C.Button>
-          <span>Confirmar</span>
+          <span onClick={onConfirm}>Confirmar</span>
         </C.ButtonContainer>
         <C.ButtonContainer>
           <C.Button onClick={onReRecord} type="button">
             <img src={ReGravar} alt="Regravar" />
           </C.Button>
-          <span>Regravar</span>
+          <span onClick={onReRecord}>Regravar</span>
         </C.ButtonContainer>
         <C.ButtonContainer>
           <C.Button onClick={onCancel} type="button">
             <img src={Cancelar} alt="Cancelar" />
           </C.Button>
-          <span>Cancelar</span>
+          <span onClick={onCancel}>Cancelar</span>
         </C.ButtonContainer>
       </C.ButtonGroup>
     </C.PostRecordContainer>

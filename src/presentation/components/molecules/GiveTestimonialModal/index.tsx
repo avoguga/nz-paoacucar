@@ -2,7 +2,8 @@ import { useState } from 'react';
 import * as C from './styles';
 import close from '../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../main/assets/icons/ant/logo vertical 300ppi.svg';
-import Play from '../../../../main/assets/icons/small/Play-video.svg';
+// import Play from '../../../../main/assets/icons/small/Play-video.svg';
+import Play from '../../../../main/assets/icons/small/video marrom.svg';
 import Texto from '../../../../main/assets/icons/small/Texto-marrom.svg';
 import FirstStepText from './components/TextTestimonial/FirstStepText';
 import SecondStepText from './components/TextTestimonial/SecondStepText';
@@ -61,33 +62,23 @@ const GiveTestimonialModal = ({
     }
 
     try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://93.127.210.45:3001/depoimentos', true);
+      const response = await fetch('http://localhost:3001/depoimentos', {
+        method: 'POST',
+        body: formData,
+      });
 
-      xhr.upload.onprogress = (event) => {
-        if (event.lengthComputable) {
-          const percentComplete = (event.loaded / event.total) * 100;
-          console.log(`Progresso do upload: ${percentComplete.toFixed(2)}%`);
-        }
-      };
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${errorText}`
+        );
+      }
 
-      xhr.onload = () => {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          const data = JSON.parse(xhr.responseText);
-          console.log('Depoimento criado com sucesso:', data);
+      const data = await response.json();
+      console.log('Depoimento criado com sucesso:', data);
 
-          setCurrentStep(0);
-          onClose && onClose();
-        } else {
-          console.error('Erro ao criar depoimento:', xhr.statusText);
-        }
-      };
-
-      xhr.onerror = () => {
-        console.error('Erro ao criar depoimento:', xhr.statusText);
-      };
-
-      xhr.send(formData);
+      setCurrentStep(0);
+      onClose && onClose();
     } catch (error) {
       console.error('Erro ao criar depoimento:', error);
     }

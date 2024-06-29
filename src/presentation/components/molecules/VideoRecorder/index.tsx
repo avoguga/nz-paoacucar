@@ -166,10 +166,12 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
           ></video>
         ) : (
           <div className="recorded-player">
-            <video className="recorded" src={recordedVideo} controls></video>
-            <a download href={recordedVideo}>
-              Download Recording
-            </a>
+            <video
+              style={{}}
+              className="recorded"
+              src={recordedVideo}
+              controls
+            ></video>
           </div>
         )}
       </C.VideoArea>
@@ -218,21 +220,24 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
             onCancel={onCancel}
           />
         )}
-        <C.ProgressContainer>
-          <C.ProgressTime>
-            <img src={Tempo} alt="Tempo" />
-            <span>{recordTime}</span> <div>segundos</div>
-          </C.ProgressTime>
-          <ProgressBar
-            completed={progress}
-            bgColor="#5D280D"
-            borderRadius="0"
-            isLabelVisible={false}
-            baseBgColor="#F9B515"
-            width="430px"
-            height="40px"
-          />
-        </C.ProgressContainer>
+        {!showPostRecordOptions && (
+          <C.ProgressContainer>
+            <C.ProgressTime>
+              <img src={Tempo} alt="Tempo" />
+              <span>{recordTime}</span> <div>segundos</div>
+            </C.ProgressTime>
+            <ProgressBar
+              completed={progress}
+              bgColor="#5D280D"
+              borderRadius="0"
+              isLabelVisible={false}
+              baseBgColor="#F9B515"
+              width="430px"
+              height="40px"
+            />
+          </C.ProgressContainer>
+        )}
+
         {recordingStatus === 'inactive' && !recordedVideo && (
           <C.NavButton onClick={onBackClick}>
             <img src={SetaEsquerda} alt="Anterior" />

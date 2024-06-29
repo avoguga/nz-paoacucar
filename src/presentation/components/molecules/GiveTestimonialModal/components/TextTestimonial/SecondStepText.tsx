@@ -40,12 +40,18 @@ const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
               padding: '0 10px',
             }}
           >
-            <C.RadioContainer>
+            <C.RadioContainer
+              onClick={() => document.getElementById('radio-button').click()}
+            >
               <C.InputLabel
+                id="radio-button"
+                name="autorizacao"
                 value="Eu autorizo o uso da minha imagem"
                 type="radio"
               />
-              <label htmlFor="html">Eu autorizo o uso da minha imagem</label>
+              <label htmlFor="radio-button">
+                Eu autorizo o uso da minha imagem
+              </label>
             </C.RadioContainer>
           </div>
         </C.InputContainer>

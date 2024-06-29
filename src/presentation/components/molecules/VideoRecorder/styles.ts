@@ -48,6 +48,11 @@ export const VideoArea = styled.div`
     background-color: black;
     object-fit: cover;
   }
+
+  .recorded-player {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -125,7 +130,6 @@ export const NavButton = styled.button`
   color: #5d280d;
   font-size: 37px;
   font-weight: bold;
-
   img {
     width: 20px;
     height: 20px;
