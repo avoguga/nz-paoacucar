@@ -22,7 +22,7 @@ const Welcome = () => {
         imageUrl: depoimento.fotoUrl,
         videoUrl: depoimento.videoUrl,
       }));
-      setItems(data);
+      setItems(data.reverse());
     } catch (error) {
       console.error('Erro ao buscar depoimentos:', error);
     }
