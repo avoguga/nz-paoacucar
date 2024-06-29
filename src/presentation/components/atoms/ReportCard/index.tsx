@@ -17,10 +17,15 @@ const ReportCard = ({
 }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [comments, setComments] = useState(initialComments);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    setComments(initialComments);
+    // Ordenar comentários por data antes de definir o estado
+    const sortedComments = [...initialComments].sort(
+      // @ts-ignore
+      (a, b) => new Date(b.data) - new Date(a.data)
+    );
+    setComments(sortedComments);
   }, [initialComments]);
 
   const openModal = () => setModalOpen(true);
@@ -33,7 +38,13 @@ const ReportCard = ({
         newCommentDetails
       );
       const newComment = response.data;
-      setComments((prevComments) => [...prevComments, newComment]);
+      setComments((prevComments) => {
+        const updatedComments = [...prevComments, newComment];
+        return updatedComments.sort(
+          // @ts-ignore
+          (a, b) => new Date(b.data) - new Date(a.data)
+        );
+      });
       fetchDepoimento();
       closeModal();
     } catch (error) {
@@ -64,14 +75,14 @@ const ReportCard = ({
         </C.Profile>
         <C.Content>
           {comments.map((comment, index) => (
-            <>
-              <C.Comment key={index}>
+            <div key={index}>
+              <C.Comment>
                 <strong>{comment.nome}</strong>
                 <span>comentou em {formatDate(comment.data)}</span>
                 <p>{comment.comentario}</p>
               </C.Comment>
               <C.HorizontalLine />
-            </>
+            </div>
           ))}
         </C.Content>
       </C.Container>
