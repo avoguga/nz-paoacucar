@@ -131,6 +131,7 @@ const GiveTestimonialModal = ({ isOpen, onClose }) => {
   };
 
   const handleConfirmCancel = () => {
+    // @ts-ignore
     setTestimonialData({ nome: '', email: '', telefone: '' });
     setCurrentStep(0);
     setIsModalOpen(false);
