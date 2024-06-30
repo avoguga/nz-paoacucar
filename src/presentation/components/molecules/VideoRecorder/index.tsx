@@ -8,11 +8,8 @@ import PostRecordOptions from './components/PostRecorderOptions';
 import logo from '../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
 import Tempo from '../../../../main/assets/icons/small/relogio tempo.svg';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
-const ffmpeg = createFFmpeg({ log: true });
-
-const mimeType = 'video/webm; codecs="vp9"';
+const mimeType = 'video/webm; codecs="opus,vp8"';
 
 const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [permission, setPermission] = useState(false);
@@ -29,10 +26,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
       try {
-        const videoConstraints = {
-          audio: true,
-          video: { width: { ideal: 1280 }, height: { ideal: 720 } },
-        }; // 720p resolution
+        const videoConstraints = { audio: true, video: true };
         const mediaStream = await navigator.mediaDevices.getUserMedia(
           videoConstraints
         );
@@ -78,12 +72,10 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
     }
   }, [recordingStatus]);
 
-  const options = { mimeType, videoBitsPerSecond: 2500000 }; // 2.5 Mbps
-
   const startRecording = () => {
     if (stream && recordingStatus === 'inactive') {
       setRecordingStatus('recording');
-      const media = new MediaRecorder(stream, options);
+      const media = new MediaRecorder(stream, { mimeType });
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       const localVideoChunks = [];
@@ -98,39 +90,19 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
     }
   };
 
-  const compressVideo = async (videoBlob) => {
-    await ffmpeg.load();
-    ffmpeg.FS('writeFile', 'input.webm', await fetchFile(videoBlob));
-
-    await ffmpeg.run(
-      '-i',
-      'input.webm',
-      '-vcodec',
-      'libx264',
-      '-crf',
-      '28',
-      'output.mp4'
-    );
-
-    const data = ffmpeg.FS('readFile', 'output.mp4');
-    const compressedBlob = new Blob([data.buffer], { type: 'video/mp4' });
-    return URL.createObjectURL(compressedBlob);
-  };
-
   const stopRecording = () => {
     if (mediaRecorder.current && recordingStatus === 'recording') {
       mediaRecorder.current.stop();
-      mediaRecorder.current.onstop = async () => {
+      mediaRecorder.current.onstop = () => {
         const videoBlob = new Blob(videoChunks, { type: mimeType });
-        const compressedVideoUrl = await compressVideo(videoBlob);
-        setRecordedVideo(compressedVideoUrl);
+        setRecordedVideo(URL.createObjectURL(videoBlob));
         setVideoChunks([]);
         setShowPostRecordOptions(true);
         setRecordingStatus('inactive');
 
         if (onStop) {
-          console.log(compressedVideoUrl);
-          onStop(compressedVideoUrl);
+          console.log(videoBlob);
+          onStop(videoBlob);
         }
       };
     }

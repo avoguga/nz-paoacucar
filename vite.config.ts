@@ -2,11 +2,10 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
-import crossOriginIsolation from 'vite-plugin-cross-origin-isolation';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), svgr(), crossOriginIsolation()],
+    plugins: [react(), svgr()],
     resolve: {
       alias: [
         { find: 'main', replacement: path.resolve(__dirname, 'src/main') },
