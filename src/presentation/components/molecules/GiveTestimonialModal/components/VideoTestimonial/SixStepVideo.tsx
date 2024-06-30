@@ -69,7 +69,7 @@ const HomeButton = styled.button`
   }
 `;
 
-const SixStepText = ({ onClose }: { onClose: () => void }) => {
+const SixStepVideo = ({ onClose }: { onClose: () => void }) => {
   const handleHomeClick = () => {
     onClose();
   };
@@ -95,4 +95,4 @@ const SixStepText = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export default SixStepText;
+export default SixStepVideo;

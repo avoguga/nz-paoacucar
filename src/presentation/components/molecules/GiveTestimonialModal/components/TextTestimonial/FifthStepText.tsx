@@ -5,6 +5,7 @@ import RetakeIcon from '../../../../../../main/assets/icons/small/regravar.svg';
 import CancelIcon from '../../../../../../main/assets/icons/small/Fechar.svg';
 import logo from '../../../../../../main/assets/icons/ant/logo horizontal 150ppi.svg';
 import ConfirmCancelModal from '../../../ConfirmCancelModal';
+import Loading from '../../../../atoms/Loading'; // Certifique-se de que o caminho está correto
 
 interface FifthStepPhotoConfirmProps {
   photo: string;
@@ -20,6 +21,7 @@ const FifthStepPhotoConfirm: React.FC<FifthStepPhotoConfirmProps> = ({
   onCancel,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCancelClick = () => {
     setIsModalOpen(true);
@@ -34,8 +36,15 @@ const FifthStepPhotoConfirm: React.FC<FifthStepPhotoConfirmProps> = ({
     onCancel();
   };
 
+  const handleConfirmClick = async () => {
+    setIsLoading(true);
+    await onConfirm();
+    setIsLoading(false);
+  };
+
   return (
     <C.Container>
+      {isLoading && <Loading />} {/* Exibe o indicador de carregamento */}
       <C.LogoContainer>
         <img
           src={logo}
@@ -59,7 +68,7 @@ const FifthStepPhotoConfirm: React.FC<FifthStepPhotoConfirmProps> = ({
             satisfeito, clique em CONFIRMAR para exibi-lo imediatamente nos
             terminais. Para sair, clique em CANCELAR.
           </h3>
-          <C.FiveStepButton onClick={onConfirm}>
+          <C.FiveStepButton onClick={handleConfirmClick}>
             <img src={ConfirmIcon} alt="Confirmar" />
             <h2>Confirmar</h2>
           </C.FiveStepButton>
