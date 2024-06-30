@@ -59,18 +59,29 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ items }) => {
           <C.VideoItem key={index} onClick={handleClick}>
             {item.type === 'video' ? (
               <C.TextItem>
+                <C.Overlay />
                 <C.Video src={item.videoUrl} controls={false} />
-                <C.VideoIcon src={videoIcon} alt="Ícone de Vídeo" />
+                <C.VideoIcon
+                  src={videoIcon}
+                  alt="Ícone de Vídeo"
+                  loading="lazy"
+                />
               </C.TextItem>
             ) : (
               <C.TextItem>
+                <C.Overlay />
                 <C.TextImage src={item.imageUrl} alt="Texto Relato" />
-                <C.TextIcon src={textIcon} alt="Ícone de Texto" />
+                <C.TextIcon
+                  src={textIcon}
+                  alt="Ícone de Texto"
+                  loading="lazy"
+                />
               </C.TextItem>
             )}
           </C.VideoItem>
         ))}
       </C.VideoWrapper>
+
       <C.ArrowButton onClick={handleNextClick}>
         <C.ArrowIcon src={setaDireita} alt="Seta Direita" />
       </C.ArrowButton>

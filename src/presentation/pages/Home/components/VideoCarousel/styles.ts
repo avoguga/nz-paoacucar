@@ -10,7 +10,7 @@ export const CarouselContainer = styled.div`
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
   overflow-x: hidden;
   width: 100%; /* Ajustado para ocupar a largura total */
-  max-width: 1200px; /* Limita a largura máxima do carrossel */
+  max-width: 120rem;
 `;
 
 export const ArrowButton = styled.button`
@@ -26,14 +26,14 @@ export const ArrowButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px; /* Ajusta a largura do botão */
+  width: 10rem; /* Ajusta a largura do botão */
 
   &:first-child {
     left: 0;
     background: linear-gradient(
       to right,
       rgba(228, 171, 87, 1),
-      rgba(211, 141, 78, 0)
+      rgba(228, 171, 87, 0)
     );
   }
 
@@ -42,14 +42,14 @@ export const ArrowButton = styled.button`
     background: linear-gradient(
       to left,
       rgba(228, 171, 87, 1),
-      rgba(211, 141, 78, 0)
+      rgba(228, 171, 87, 0)
     );
   }
 `;
 
 export const ArrowIcon = styled.img`
-  width: 28px;
-  height: 45px;
+  width: 3rem;
+  height: 3rem;
 `;
 
 export const VideoWrapper = styled.div`
@@ -60,21 +60,32 @@ export const VideoWrapper = styled.div`
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
-
+  padding: 0 1rem;
   &::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
 `;
 
 export const VideoItem = styled.div`
-  min-width: 25%;
-  margin: 0 1.5rem;
   position: relative;
+  &:hover img,
+  &:hover video {
+    opacity: 0.8;
+  }
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(93, 40, 13, 0.6);
 `;
 
 export const Video = styled.video`
-  width: 350px;
-  height: 200px;
+  width: 400px;
+  height: 100%;
   object-fit: cover;
 `;
 
@@ -89,8 +100,8 @@ export const TextItem = styled.div`
 `;
 
 export const TextImage = styled.img`
-  width: 350px;
-  height: 200px;
+  width: 400px;
+  height: 100%;
   object-fit: cover;
 `;
 

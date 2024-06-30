@@ -51,16 +51,19 @@ const AllTestimonials: React.FC = () => {
         <C.TestimonialCard key={index} onClick={() => handleCardClick(item)}>
           {item.type === 'video' ? (
             <>
+              <C.Overlay />
               <C.Video src={item.videoUrl} controls={false} />
               <C.TextIcon>
-                <img src={videoIcon} alt="Video Thumbnail" />
+                <img src={videoIcon} alt="Video Thumbnail" loading="lazy" />
               </C.TextIcon>
             </>
           ) : (
             <>
+              <C.Overlay />
+
               <C.Image src={item.imageUrl} alt="Text Thumbnail" />
               <C.TextIcon>
-                <img src={textIcon} alt="Text Thumbnail" />
+                <img src={textIcon} alt="Text Thumbnail" loading="lazy" />
               </C.TextIcon>
             </>
           )}

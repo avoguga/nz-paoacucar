@@ -43,6 +43,10 @@ const Welcome = () => {
     setFetchTrigger(!fetchTrigger); // Alterna o valor do fetchTrigger para refazer o fetch
   };
 
+  const handleClickRelatos = () => {
+    window.location.href = '/relatos';
+  };
+
   return (
     <C.Container>
       <C.WelcomeField>
@@ -83,7 +87,7 @@ const Welcome = () => {
       <Button
         backgroundColor={sg.colors.backgroundColors.colorBackgroundButtonTwo}
         onClick={() => {
-          console.log('oi');
+          handleClickRelatos();
         }}
         title="Galeria de depoimentos"
         style={{

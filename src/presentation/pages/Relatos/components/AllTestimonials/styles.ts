@@ -12,10 +12,19 @@ export const Container = styled.div`
 
 export const TestimonialsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   width: 100%;
-  max-width: 1200px;
-  gap: 34px;
+  gap: 2rem;
+  max-width: 100rem;
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(93, 40, 13, 0.6);
 `;
 
 export const TestimonialCard = styled.div`
@@ -28,14 +37,14 @@ export const TestimonialCard = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 21.875rem;
+  width: 100%;
   height: 12.5rem;
   display: block;
   object-fit: cover;
 `;
 
 export const Video = styled.video`
-  width: 21.875rem;
+  width: 100%;
   height: 12.5rem;
   display: block;
   object-fit: cover;
