@@ -5,10 +5,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   background-color: ${sg.colors.backgroundColors.colorBackgroundSolo};
   height: 100%;
-  gap: 25px;
-  padding: 20px;
+  padding: 5rem;
+  gap: 1.5rem;
 `;
 
 export const TextProfile = styled.aside`
@@ -46,6 +47,7 @@ export const TextIcon = styled.img`
 
 export const RelatoContent = styled.div`
   display: flex;
+  width: 50%;
   flex-direction: column;
   align-items: center;
   padding: 20px;
@@ -62,7 +64,7 @@ export const TextContent = styled.div`
   align-items: center;
   background-color: ${sg.colors.backgroundColors
     .colorBackgroundFieldTextGeneral};
-  width: 50rem;
+  width: 100%;
   height: 50rem;
   overflow-y: scroll;
 `;

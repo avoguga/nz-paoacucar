@@ -14,6 +14,7 @@ export const Container = styled.div`
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
+  width: fit-content;
 `;
 
 export const Profile = styled.div`
@@ -39,7 +40,7 @@ export const CloseButton = styled.button`
   position: absolute;
   display: flex;
   top: 5%;
-  right: 9%;
+  right: 5.5%;
   justify-content: right;
 `;
 
