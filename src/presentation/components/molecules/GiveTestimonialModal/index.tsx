@@ -54,10 +54,13 @@ const GiveTestimonialModal = ({ isOpen, onClose }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/depoimentos', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        'https://gestormuseu.serradabarriga.app.br/depoimentos',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -88,7 +91,7 @@ const GiveTestimonialModal = ({ isOpen, onClose }) => {
 
     try {
       const response = await fetch(
-        'https://gestormuseu.serradabarriga.app.br//depoimentos',
+        'https://gestormuseu.serradabarriga.app.br/depoimentos',
         {
           method: 'POST',
           body: formData,

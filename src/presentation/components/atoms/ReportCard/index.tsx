@@ -34,7 +34,7 @@ const ReportCard = ({
   const sendComment = async (newCommentDetails) => {
     try {
       const response = await axios.post(
-        `https://gestormuseu.serradabarriga.app.br//depoimentos/${depoimentoId}/comentarios`,
+        `https://gestormuseu.serradabarriga.app.br/depoimentos/${depoimentoId}/comentarios`,
         newCommentDetails
       );
       const newComment = response.data;

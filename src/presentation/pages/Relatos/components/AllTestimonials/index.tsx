@@ -19,7 +19,7 @@ const AllTestimonials: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('https://gestormuseu.serradabarriga.app.br//depoimentos')
+      .get('https://gestormuseu.serradabarriga.app.br/depoimentos')
       .then((response) => {
         const testimonials = response.data.map((item: any) => ({
           id: item._id,

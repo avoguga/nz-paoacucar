@@ -13,7 +13,7 @@ const Relatos = () => {
     const fetchTestimonials = async () => {
       try {
         const response = await axios.get(
-          'https://gestormuseu.serradabarriga.app.br//depoimentos'
+          'https://gestormuseu.serradabarriga.app.br/depoimentos'
         );
         const data = response.data.map((depoimento: any) => ({
           id: depoimento._id,
