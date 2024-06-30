@@ -36,7 +36,6 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
         liveVideoFeed.current.muted = true;
       } catch (err) {
         console.error('Failed to get media stream:', err);
-        alert(err.message);
       }
     } else {
       alert('The MediaRecorder API is not supported in your browser.');
