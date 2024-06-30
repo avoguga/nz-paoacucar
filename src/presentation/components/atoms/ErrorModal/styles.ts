@@ -42,10 +42,6 @@ export const Button = styled.button`
   align-items: center;
   gap: 10px;
   font-size: 20px;
-
-  &:hover {
-    background-color: ${sg.colors.textColors.colorTextNeutral};
-  }
 `;
 
 export const InputContainer = styled.div`
@@ -91,7 +87,7 @@ export const ModalContent = styled.div`
   max-width: 90%;
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
 
   align-items: center;

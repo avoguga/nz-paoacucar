@@ -1,12 +1,22 @@
-import React from 'react';
+import { useState } from 'react';
 import Confirmar from '../../../../../main/assets/icons/small/Confirmar.svg';
 import ReGravar from '../../../../../main/assets/icons/small/regravar.svg';
 import Cancelar from '../../../../../main/assets/icons/small/Fechar.svg';
 import * as C from './styles';
+import Loading from '../../../atoms/Loading'; // Certifique-se de que o caminho está correto
 
 const PostRecordOptions = ({ onConfirm, onReRecord, onCancel }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleConfirmClick = async () => {
+    setIsLoading(true);
+    await onConfirm();
+    setIsLoading(false);
+  };
+
   return (
     <C.PostRecordContainer>
+      {isLoading && <Loading />} {/* Exibe o indicador de carregamento */}
       <h2>Agora falta pouco,</h2>
       <p>
         Você pode <strong>ASSISTIR</strong> ao vídeo clicando nele. Se desejar
@@ -17,10 +27,10 @@ const PostRecordOptions = ({ onConfirm, onReRecord, onCancel }) => {
       </p>
       <C.ButtonGroup>
         <C.ButtonContainer>
-          <C.Button onClick={onConfirm} type="button">
+          <C.Button onClick={handleConfirmClick} type="button">
             <img src={Confirmar} alt="Confirmar" />
           </C.Button>
-          <span onClick={onConfirm}>Confirmar</span>
+          <span onClick={handleConfirmClick}>Confirmar</span>
         </C.ButtonContainer>
         <C.ButtonContainer>
           <C.Button onClick={onReRecord} type="button">

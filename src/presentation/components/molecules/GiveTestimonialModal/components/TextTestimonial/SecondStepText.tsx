@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Text from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
 import SetaDireita from '../../../../../../main/assets/icons/small/Seta_direita.png';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/Seta_esquerda.png';
 import * as C from './styles';
+import ErrorModal from '../../../../atoms/ErrorModal'; // Certifique-se de importar o ErrorModal corretamente
 
 interface SecondStepProps {
   onBackClick: () => void;
@@ -10,6 +12,18 @@ interface SecondStepProps {
 }
 
 const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+
+  const handleNextClick = () => {
+    if (isAuthorized) {
+      setIsErrorModalOpen(false);
+      onNextClick();
+    } else {
+      setIsErrorModalOpen(true);
+    }
+  };
+
   return (
     <C.Container>
       <C.Header>
@@ -41,13 +55,18 @@ const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
             }}
           >
             <C.RadioContainer
-              onClick={() => document.getElementById('radio-button').click()}
+              onClick={() => {
+                setIsAuthorized(true);
+                setIsErrorModalOpen(false);
+              }}
             >
               <C.InputLabel
                 id="radio-button"
                 name="autorizacao"
                 value="Eu autorizo o uso da minha imagem"
                 type="radio"
+                checked={isAuthorized}
+                readOnly
               />
               <label htmlFor="radio-button">
                 Eu autorizo o uso da minha imagem
@@ -55,11 +74,16 @@ const SecondStep = ({ onBackClick, onNextClick, nome }: SecondStepProps) => {
             </C.RadioContainer>
           </div>
         </C.InputContainer>
-        <C.Button onClick={onNextClick}>
+        <C.Button onClick={handleNextClick}>
           Próximo
           <img src={SetaDireita} alt="Próximo" />
         </C.Button>
       </C.Footer>
+      <ErrorModal
+        isOpen={isErrorModalOpen}
+        onClose={() => setIsErrorModalOpen(false)}
+        messages={['Por favor, clique na autorização antes de prosseguir.']}
+      />
     </C.Container>
   );
 };
