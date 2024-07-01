@@ -67,6 +67,18 @@ const FirstStep: React.FC<FirstStepProps> = ({ onBackClick, onNextClick }) => {
 
   const onKeyPress = (button) => {
     if (button === '{shift}' || button === '{lock}') handleShift();
+    if (button === '{accents}' || button === '{default}') {
+      button === '{accents}' ? handleAccents() : handleDefault();
+      return false; // Prevent button text from being inserted
+    }
+  };
+
+  const handleAccents = () => {
+    setLayout('accents');
+  };
+
+  const handleDefault = () => {
+    setLayout('default');
   };
 
   const onFocusInput = (name, value) => {
@@ -133,22 +145,7 @@ const FirstStep: React.FC<FirstStepProps> = ({ onBackClick, onNextClick }) => {
         layoutName={layout}
         onChange={onChange}
         onKeyPress={onKeyPress}
-        layout={{
-          default: [
-            "\u005c 1 2 3 4 5 6 7 8 9 0 ' {bksp}",
-            '{tab} q w e r t y u i o p \u00b4 [',
-            '{lock} a s d f g h j k l ç ~ ] {enter}',
-            '{shift} \\ z x c v b n m , . - {shift}',
-            '.com @ {space}',
-          ],
-          shift: [
-            '| ! " # $ % ¨ & * ( ) _ {bksp}',
-            '{tab} Q W E R T Y U I O P ` {',
-            '{lock} A S D F G H J K L Ç ^ } {enter}',
-            '{shift} | Z X C V B N M < > _ {shift}',
-            '.com @ {space}',
-          ],
-        }}
+        layout={keyboardLayouts}
         theme={'hg-theme-default myTheme1'}
       />
       <ErrorModal
@@ -161,3 +158,27 @@ const FirstStep: React.FC<FirstStepProps> = ({ onBackClick, onNextClick }) => {
 };
 
 export default FirstStep;
+
+const keyboardLayouts = {
+  default: [
+    "\u005c 1 2 3 4 5 6 7 8 9 0 ' {bksp}",
+    '{tab} q w e r t y u i o p [ Acentos',
+    '{lock} a s d f g h j k l ç ] {enter}',
+    '{shift} \\ z x c v b n m , . - {shift}',
+    '.com @ {space}',
+  ],
+  shift: [
+    '| ! " # $ % ¨ & * ( ) _ {bksp}',
+    '{tab} Q W E R T Y U I O P { [ Acentos',
+    '{lock} A S D F G H J K L Ç } ] {enter}',
+    '{shift} | Z X C V B N M < > _ {shift}',
+    '.com @ {space}',
+  ],
+  accents: [
+    'Á É Í Ó Ú À È Ì Ò Ù Â Ê Î Ô Û Ã Õ Ç {bksp}',
+    'á é í ó ú à è ì ò ù â ê î ô û ã õ ç Padrão',
+    '{lock} á é í ó ú à è ì ò ù â ê î ô û ã õ ç {enter}',
+    '{shift} á é í ó ú à è ì ò ù â ê î ô û ã õ ç {shift}',
+    '.com @ {space}',
+  ],
+};

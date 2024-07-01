@@ -7,6 +7,7 @@ import ErrorModal from '../../../../atoms/ErrorModal';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './keyboardStyles.css';
+import { keyboardLayouts } from 'presentation/components/molecules/ComentModal';
 
 interface FirstStepTextProps {
   onBackClick?: () => void;
@@ -70,6 +71,18 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
 
   const onKeyPress = (button) => {
     if (button === '{shift}' || button === '{lock}') handleShift();
+    if (button === '{accents}' || button === '{default}') {
+      button === '{accents}' ? handleAccents() : handleDefault();
+      return false; // Prevent button text from being inserted
+    }
+  };
+
+  const handleAccents = () => {
+    setLayout('accents');
+  };
+
+  const handleDefault = () => {
+    setLayout('default');
   };
 
   const onFocusInput = (name, value) => {
@@ -136,22 +149,7 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
         layoutName={layout}
         onChange={onChange}
         onKeyPress={onKeyPress}
-        layout={{
-          default: [
-            "\u005c 1 2 3 4 5 6 7 8 9 0 ' {bksp}",
-            '{tab} q w e r t y u i o p \u00b4 [',
-            '{lock} a s d f g h j k l ç ~ ] {enter}',
-            '{shift} \\ z x c v b n m , . - {shift}',
-            '.com @ {space}',
-          ],
-          shift: [
-            '| ! " # $ % ¨ & * ( ) _ {bksp}',
-            '{tab} Q W E R T Y U I O P ` {',
-            '{lock} A S D F G H J K L Ç ^ } {enter}',
-            '{shift} | Z X C V B N M < > _ {shift}',
-            '.com @ {space}',
-          ],
-        }}
+        layout={keyboardLayouts}
         theme={'hg-theme-default myTheme1'}
       />
       <ErrorModal
