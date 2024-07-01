@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Play from '../../../../main/assets/icons/small/video branco.svg';
+import Gravar from '../../../../main/assets/icons/small/gravar.svg';
 import Gravando from '../../../../main/assets/icons/small/Gravando.png';
 import Stop from '../../../../main/assets/icons/small/Parar.png';
 import SetaEsquerda from '../../../../main/assets/icons/small/seta esquerda.svg';
@@ -215,7 +216,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
               <>
                 <C.ButtonContainer>
                   <C.Button onClick={startRecording} type="button">
-                    <img src={Play} alt="Gravar" />
+                    <img src={Gravar} alt="Gravar" />
                   </C.Button>
                   <span>Gravar</span>
                 </C.ButtonContainer>
