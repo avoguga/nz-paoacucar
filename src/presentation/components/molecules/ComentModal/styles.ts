@@ -28,7 +28,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalHeader = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 20rem;
 `;
 
 export const ModalTitle = styled.h2`
@@ -40,6 +40,7 @@ export const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 20rem;
 `;
 
 export const Input = styled.input`
@@ -89,6 +90,7 @@ export const ModalFooter = styled.div`
   gap: 2rem;
   justify-content: space-between;
   margin-top: 2rem;
+  margin-bottom: 20rem;
 `;
 
 export const Button = styled.button<any>`
