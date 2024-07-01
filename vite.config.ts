@@ -13,9 +13,9 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
-          name: 'My Awesome App',
-          short_name: 'MyApp',
-          description: 'My Awesome App description',
+          name: 'Museu de Arte e Cultura - Pao de Açúcar',
+          short_name: 'Museu - Pao de Açúcar',
+          description: 'Museu de Arte e Cultura - Pao de Açúcar',
           background_color: '#E4AB57',
           theme_color: '#E4AB57',
           display: 'standalone',
