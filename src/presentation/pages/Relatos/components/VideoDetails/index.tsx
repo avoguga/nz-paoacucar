@@ -144,22 +144,26 @@ const VideoDetail = () => {
               />
             </C.VolumeContainer>
             <C.ProgressBarWrapper>
-              <ProgressBar
-                completed={progress}
-                bgColor="#5D280D"
-                height="20px"
-                width="100%"
-                baseBgColor="#FFD600"
-                isLabelVisible={false}
-                borderRadius="0"
-              />
-              <C.Slider
-                type="range"
-                min="0"
-                max="100"
-                value={progress}
-                onChange={handleProgressChange}
-              />
+              {false && (
+                <>
+                  <ProgressBar
+                    completed={progress}
+                    bgColor="#5D280D"
+                    height="20px"
+                    width="100%"
+                    baseBgColor="#FFD600"
+                    isLabelVisible={false}
+                    borderRadius="0"
+                  />
+                  <C.Slider
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={progress}
+                    onChange={handleProgressChange}
+                  />
+                </>
+              )}
             </C.ProgressBarWrapper>
           </C.VideoWrapper>
           <C.ProfileText>{depoimento.nome}</C.ProfileText>
