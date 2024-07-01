@@ -55,6 +55,60 @@ export const VideoArea = styled.div`
   }
 `;
 
+export const VideoWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(139, 69, 19, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const VideoPlayer = styled.video<{ isPlaying?: boolean }>`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const Overlay = styled.div<{ isPlaying: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  visibility: ${(props) => (!props.isPlaying ? 'visible' : 'hidden')};
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(93, 40, 13, 0.6);
+
+  span {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+`;
+
+export const PlayButton = styled.button`
+  width: 20rem;
+  height: 80px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 13rem;
+    height: 13rem;
+  }
+`;
+
 export const LogoContainer = styled.div`
   position: absolute;
   top: 80px;
@@ -143,14 +197,6 @@ export const ProgressContainer = styled.div`
   align-items: center;
   margin-top: 20px;
   gap: 10px;
-`;
-
-export const ProgressBar = styled.div`
-  height: 20px;
-  background-color: #ffb400; /* Cor inicial amarela */
-  flex-grow: 1;
-  transition: width 1s ease, background-color 1s ease;
-  margin-left: 30px;
 `;
 
 export const ProgressTime = styled.div`

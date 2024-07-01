@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import Play from '../../../../main/assets/icons/small/Graavr.png';
+import Play from '../../../../main/assets/icons/small/video branco.svg';
 import Gravando from '../../../../main/assets/icons/small/Gravando.png';
 import Stop from '../../../../main/assets/icons/small/Parar.png';
 import SetaEsquerda from '../../../../main/assets/icons/small/seta esquerda.svg';
@@ -22,6 +22,8 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [showPostRecordOptions, setShowPostRecordOptions] = useState(false);
   const [recordTime, setRecordTime] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const recordedVideoRef = useRef<HTMLVideoElement>(null);
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
@@ -150,6 +152,22 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
     }
   };
 
+  const handlePlayPause = () => {
+    const video = recordedVideoRef.current;
+    if (video) {
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleVideoEnded = () => {
+    setIsPlaying(false);
+  };
+
   return (
     <C.RecorderContainer>
       <C.VideoArea>
@@ -164,14 +182,23 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
             className="live-player"
           ></video>
         ) : (
-          <div className="recorded-player">
-            <video
-              style={{}}
+          <C.VideoWrapper>
+            <C.VideoPlayer
+              ref={recordedVideoRef}
               className="recorded"
               src={recordedVideo}
               controls
-            ></video>
-          </div>
+              onEnded={handleVideoEnded}
+            />
+            <C.Overlay isPlaying={isPlaying} onClick={handlePlayPause}>
+              {!isPlaying && (
+                <C.PlayButton>
+                  <img src={Play} alt="Play" />
+                  <span>Clique para assistir</span>
+                </C.PlayButton>
+              )}
+            </C.Overlay>
+          </C.VideoWrapper>
         )}
       </C.VideoArea>
       <C.InfoArea>
