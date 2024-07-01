@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
+    "typeRoots": ["./node_modules/@types", "./types"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
