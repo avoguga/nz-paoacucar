@@ -273,6 +273,7 @@ export const HeaderCapture = styled.div`
   justify-content: center;
 `;
 export const ClickImage = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -294,10 +295,11 @@ export const PhotoContainer = styled.div`
 
 export const CapturedImage = styled.img`
   width: 150%;
-  height: 672px;
+  height: 1000px;
   background-color: aliceblue;
 `;
 export const FiveStepGroup = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 
