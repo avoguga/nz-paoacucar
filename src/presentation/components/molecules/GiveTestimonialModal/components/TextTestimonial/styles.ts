@@ -112,17 +112,19 @@ export const RadioContainer = styled.div`
 `;
 
 // third steps
+
+export const TitleMsgThird = styled.h3`
+  font-size: 26px;
+  color: #5d280d;
+  text-align: center;
+`;
+
 export const HeaderText = styled.div`
-  width: 50%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: baseline;
-
   white-space: nowrap;
-  img {
-    height: 75px;
-  }
 `;
 
 export const VideoSection = styled.div`
@@ -142,30 +144,19 @@ export const Navigation = styled.div`
   width: 100%;
   margin-top: 20px;
 `;
+
 export const TextInputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  justify-content: baseline;
-  gap: 10rem;
+  gap: 13rem;
   padding: 20px;
   border-radius: 8px;
 `;
 
-export const TextIcon = styled.img`
-  align-self: flex-start;
-`;
-export const CharCount = styled.div`
-  display: flex;
-  color: ${sg.colors.textColors.colorTextDefault};
-  margin-top: 10px;
-  font-size: 25px;
-  font-weight: 600;
-`;
-
 export const TextArea = styled.textarea`
-  width: 800px;
-  height: 800px;
+  width: 900px;
+  height: 500px;
   padding: 15px;
   border: none transparent;
   border-radius: none;
@@ -185,10 +176,29 @@ export const TextArea = styled.textarea`
     outline: 0;
   }
 `;
+
+export const TextIcon = styled.img`
+  align-self: flex-start;
+`;
+export const CharCount = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${sg.colors.textColors.colorTextDefault};
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: 600;
+
+  span:nth-child(1) {
+    font-size: 30px;
+  }
+`;
+
 export const FooterText = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 70rem;
+  gap: 80rem;
+  transform: translateY(-10rem);
 `;
 
 // QUARTO PASSO

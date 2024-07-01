@@ -1,0 +1,71 @@
+/* keyboardStyles.css */
+/*
+  Theme: myTheme1
+*/
+.simple-keyboard.myTheme1 {
+  background-color: #1d1d1d;
+  border-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  max-width: 100%;
+  z-index: 1000;
+}
+
+.simple-keyboard.myTheme1 .hg-button {
+  height: 70px; /* Aumenta a altura dos botões */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2e2e2e;
+  color: white;
+  border: 1px solid #3a3a3a;
+  font-size: 24px; /* Aumenta o tamanho da fonte */
+}
+
+.simple-keyboard.myTheme1 .hg-button:active {
+  background: #4a4a4a;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-space {
+  flex: 1;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-shift {
+  background: #2e2e2e;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-enter {
+  background: #2e2e2e;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-bksp {
+  background: #2e2e2e;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-tab {
+  background: #2e2e2e;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button.hg-button-default {
+  background: #2e2e2e;
+  color: white;
+}
+
+.simple-keyboard.myTheme1 .hg-button:active {
+  background: #555;
+  color: white;
+}
+
+#root .simple-keyboard.myTheme1 + .simple-keyboard-preview {
+  background: #2e2e2e;
+}

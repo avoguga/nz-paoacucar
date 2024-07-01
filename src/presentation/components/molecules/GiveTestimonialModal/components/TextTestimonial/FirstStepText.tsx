@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as C from './styles';
 import Text from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
 import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 import ErrorModal from '../../../../atoms/ErrorModal';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
+import './keyboardStyles.css';
 
 interface FirstStepTextProps {
   onBackClick?: () => void;
@@ -23,6 +26,9 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
   const [telefone, setTelefone] = useState('');
   const [errors, setErrors] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inputName, setInputName] = useState('');
+  const [layout, setLayout] = useState('default');
+  const keyboard = useRef(null);
 
   const handleNextClick = () => {
     const newErrors: string[] = [];
@@ -51,8 +57,38 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
     }
   };
 
+  const onChange = (input) => {
+    if (inputName === 'nome') setNome(input);
+    if (inputName === 'email') setEmail(input);
+    if (inputName === 'telefone') setTelefone(input);
+  };
+
+  const handleShift = () => {
+    const newLayoutName = layout === 'default' ? 'shift' : 'default';
+    setLayout(newLayoutName);
+  };
+
+  const onKeyPress = (button) => {
+    if (button === '{shift}' || button === '{lock}') handleShift();
+  };
+
+  const onFocusInput = (name, value) => {
+    setInputName(name);
+    keyboard.current.setInput(value);
+  };
+
+  const onChangeInput = (event, setState) => {
+    const value = event.target.value;
+    setState(value);
+    keyboard.current.setInput(value);
+  };
+
   return (
-    <C.Container>
+    <C.Container
+      style={{
+        marginBottom: '20.25rem',
+      }}
+    >
       <C.Header>
         <img src={Text} alt="video" />
         <C.TitleMsg>
@@ -73,18 +109,21 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
           <C.Input
             placeholder="Nome"
             value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            onChange={(e) => onChangeInput(e, setNome)}
+            onFocus={() => onFocusInput('nome', nome)}
           />
           <C.Input
             placeholder="E-mail"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => onChangeInput(e, setEmail)}
+            onFocus={() => onFocusInput('email', email)}
           />
           <C.Input
             placeholder="Telefone"
             value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
+            onChange={(e) => onChangeInput(e, setTelefone)}
+            onFocus={() => onFocusInput('telefone', telefone)}
           />
         </C.InputContainer>
         <C.Button onClick={handleNextClick}>
@@ -92,6 +131,29 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
           <img src={SetaDireita} alt="Próximo" />
         </C.Button>
       </C.Footer>
+      <Keyboard
+        keyboardRef={(r) => (keyboard.current = r)}
+        layoutName={layout}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+        layout={{
+          default: [
+            "\u005c 1 2 3 4 5 6 7 8 9 0 ' {bksp}",
+            '{tab} q w e r t y u i o p \u00b4 [',
+            '{lock} a s d f g h j k l ç ~ ] {enter}',
+            '{shift} \\ z x c v b n m , . - {shift}',
+            '.com @ {space}',
+          ],
+          shift: [
+            '| ! " # $ % ¨ & * ( ) _ {bksp}',
+            '{tab} Q W E R T Y U I O P ` {',
+            '{lock} A S D F G H J K L Ç ^ } {enter}',
+            '{shift} | Z X C V B N M < > _ {shift}',
+            '.com @ {space}',
+          ],
+        }}
+        theme={'hg-theme-default myTheme1'}
+      />
       <ErrorModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

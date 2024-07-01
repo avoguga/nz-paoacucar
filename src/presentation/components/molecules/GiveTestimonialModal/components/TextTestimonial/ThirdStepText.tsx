@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as C from './styles';
 import SetaDireita from '../../../../../../main/assets/icons/small/seta direita.svg';
 import SetaEsquerda from '../../../../../../main/assets/icons/small/seta esquerda.svg';
 import TextIcon from '../../../../../../main/assets/icons/small/Texto-marrom.svg';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
+import './keyboardStyles.css'; // Arquivo CSS para tema escuro
 
 interface ThirdStepTextProps {
   onBackClick: () => void;
@@ -14,28 +17,61 @@ const ThirdStepText: React.FC<ThirdStepTextProps> = ({
   onSubmit,
 }) => {
   const [texto, setTexto] = useState('');
+  const [layout, setLayout] = useState('default');
+  const keyboard = useRef(null);
 
   const handleSubmit = () => {
     onSubmit(texto);
   };
 
+  const onChange = (input) => {
+    setTexto(input);
+  };
+
+  const handleShift = () => {
+    const newLayoutName = layout === 'default' ? 'shift' : 'default';
+    setLayout(newLayoutName);
+  };
+
+  const onKeyPress = (button) => {
+    if (button === '{shift}' || button === '{lock}') handleShift();
+  };
+
+  const onFocusTextArea = (value) => {
+    keyboard.current.setInput(value);
+  };
+
+  const onChangeTextArea = (event) => {
+    const value = event.target.value;
+    setTexto(value);
+    keyboard.current.setInput(value);
+  };
+
   return (
-    <C.Container>
+    <C.Container
+      style={{
+        marginBottom: '15.25rem',
+      }}
+    >
       <C.HeaderText>
-        <C.TitleMsg>
+        <C.TitleMsgThird>
           Escreva seu depoimento na caixa de texto abaixo:
-        </C.TitleMsg>
+        </C.TitleMsgThird>
       </C.HeaderText>
       <C.TextInputContainer>
         <C.TextIcon src={TextIcon} alt="Text Icon" />
         <C.TextArea
           placeholder="Escreva seu depoimento aqui..."
           value={texto}
-          onChange={(e) => setTexto(e.target.value)}
+          onChange={onChangeTextArea}
+          onFocus={() => onFocusTextArea(texto)}
           // @ts-ignore
           maxLength={500}
         ></C.TextArea>
-        <C.CharCount>{texto.length} / 500 caracteres</C.CharCount>
+        <C.CharCount>
+          <span>{texto.length} / 500</span>
+          <span>caracteres</span>
+        </C.CharCount>
       </C.TextInputContainer>
       <C.FooterText>
         <C.Button onClick={onBackClick}>
@@ -47,6 +83,29 @@ const ThirdStepText: React.FC<ThirdStepTextProps> = ({
           <img src={SetaDireita} alt="Próximo" />
         </C.Button>
       </C.FooterText>
+      <Keyboard
+        keyboardRef={(r) => (keyboard.current = r)}
+        layoutName={layout}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+        layout={{
+          default: [
+            "\u005c 1 2 3 4 5 6 7 8 9 0 ' {bksp}",
+            '{tab} q w e r t y u i o p \u00b4 [',
+            '{lock} a s d f g h j k l ç ~ ] {enter}',
+            '{shift} \\ z x c v b n m , . - {shift}',
+            '.com @ {space}',
+          ],
+          shift: [
+            '| ! " # $ % ¨ & * ( ) _ {bksp}',
+            '{tab} Q W E R T Y U I O P ` {',
+            '{lock} A S D F G H J K L Ç ^ } {enter}',
+            '{shift} | Z X C V B N M < > _ {shift}',
+            '.com @ {space}',
+          ],
+        }}
+        theme={'hg-theme-default myTheme1'}
+      />
     </C.Container>
   );
 };
