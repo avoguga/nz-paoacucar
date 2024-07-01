@@ -16,15 +16,26 @@ const FourthStepPhoto: React.FC<FourthStepPhotoProps> = ({
 }) => {
   const webcamRef = useRef<Webcam>(null);
   const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   const capturePhoto = () => {
-    const imageSrc = webcamRef.current?.getScreenshot();
-    if (imageSrc) {
-      setCapturedPhoto(imageSrc);
-      setTimeout(() => {
-        onNextClick(imageSrc);
-      }, 100);
-    }
+    setCountdown(5); // Start the countdown from 5 seconds
+    const countdownInterval = setInterval(() => {
+      setCountdown((prevCountdown) => {
+        if (prevCountdown === 1) {
+          clearInterval(countdownInterval);
+          const imageSrc = webcamRef.current?.getScreenshot();
+          if (imageSrc) {
+            setCapturedPhoto(imageSrc);
+            setTimeout(() => {
+              onNextClick(imageSrc);
+            }, 100);
+          }
+          return null;
+        }
+        return prevCountdown! - 1;
+      });
+    }, 1000);
   };
 
   return (
@@ -59,10 +70,11 @@ const FourthStepPhoto: React.FC<FourthStepPhotoProps> = ({
             diante da câmera e clique em FOTO. Após pressionar o botão, você
             terá 5 segundos para se preparar.
           </C.TitleCaptureImage>
-          <C.CameraButton onClick={capturePhoto}>
+          <C.CameraButton onClick={capturePhoto} disabled={countdown !== null}>
             <img src={CameraIcon} alt="Foto" />
             <h2>Foto</h2>
           </C.CameraButton>
+          {countdown !== null && <C.Countdown>{countdown}</C.Countdown>}
           <C.Button onClick={onBackClick}>
             <img src={SetaEsquerda} alt="Anterior" />
             Anterior
