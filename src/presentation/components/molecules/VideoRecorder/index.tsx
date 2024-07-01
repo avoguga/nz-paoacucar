@@ -9,7 +9,8 @@ import logo from '../../../../main/assets/icons/ant/logo horizontal 300ppi.svg';
 import Tempo from '../../../../main/assets/icons/small/relogio tempo.svg';
 import ProgressBar from '@ramonak/react-progress-bar';
 
-const mimeType = 'video/webm; codecs="opus,vp8"';
+// Atualize o mimeType para video/webm com codec VP9 para melhor compressão
+const mimeType = 'video/webm; codecs="vp9"';
 
 const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [permission, setPermission] = useState(false);
@@ -23,12 +24,15 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [recordTime, setRecordTime] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const recordedVideoRef = useRef<HTMLVideoElement>(null);
+  const recordedVideoRef = useRef(null);
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
       try {
-        const videoConstraints = { audio: true, video: true };
+        const videoConstraints = {
+          audio: true,
+          video: { width: 640, height: 480 },
+        }; // Dimensões menores para reduzir o tamanho do vídeo
         const mediaStream = await navigator.mediaDevices.getUserMedia(
           videoConstraints
         );
@@ -76,7 +80,8 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const startRecording = () => {
     if (stream && recordingStatus === 'inactive') {
       setRecordingStatus('recording');
-      const media = new MediaRecorder(stream, { mimeType });
+      const options = { mimeType, videoBitsPerSecond: 2500000 }; // Reduzir a taxa de bits do vídeo
+      const media = new MediaRecorder(stream, options);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       const localVideoChunks = [];
