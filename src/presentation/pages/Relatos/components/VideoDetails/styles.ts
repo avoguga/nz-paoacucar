@@ -164,7 +164,7 @@ export const VolumeSlider = styled.input.attrs<SliderProps>({
   }
 `;
 
-export const ProgressBar = styled.input.attrs<SliderProps>({
+export const Slider = styled.input.attrs<SliderProps>({
   type: 'range',
 })<SliderProps>`
   position: absolute;
@@ -173,32 +173,16 @@ export const ProgressBar = styled.input.attrs<SliderProps>({
   width: 100%;
   height: 20px;
   bottom: 0px;
-  background: ${(props) =>
-    `linear-gradient(to right, #FFD600 ${props.value}%, #5D280D ${props.value}%)`};
-  cursor: pointer;
-  outline: none;
+  opacity: 0;
+  z-index: 1;
+`;
 
-  &::-webkit-slider-thumb {
-    width: 0;
-    height: 0;
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-  }
-
-  &::-moz-range-thumb {
-    width: 0;
-    height: 0;
-    background: transparent;
-    border: none;
-  }
-
-  &::-ms-thumb {
-    width: 0;
-    height: 0;
-    background: transparent;
-    border: none;
-  }
+export const ProgressBarWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: 0px;
+  z-index: 0;
 `;
 
 export const ProfileText = styled.h2`

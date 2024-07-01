@@ -8,6 +8,7 @@ import playIcon from '../../../../../main/assets/icons/small/video branco.svg';
 import chatIcon from '../../../../../main/assets/icons/small/conversa.svg';
 import ReportCard from 'presentation/components/atoms/ReportCard';
 import close from '../../../../../main/assets/icons/small/Fechar.svg';
+import ProgressBar from '@ramonak/react-progress-bar';
 
 interface Comment {
   nome: string;
@@ -142,13 +143,24 @@ const VideoDetail = () => {
                 onChange={handleVolumeChange}
               />
             </C.VolumeContainer>
-            <C.ProgressBar
-              type="range"
-              min="0"
-              max="100"
-              value={progress}
-              onChange={handleProgressChange}
-            />
+            <C.ProgressBarWrapper>
+              <ProgressBar
+                completed={progress}
+                bgColor="#5D280D"
+                height="20px"
+                width="100%"
+                baseBgColor="#FFD600"
+                isLabelVisible={false}
+                borderRadius="0"
+              />
+              <C.Slider
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={handleProgressChange}
+              />
+            </C.ProgressBarWrapper>
           </C.VideoWrapper>
           <C.ProfileText>{depoimento.nome}</C.ProfileText>
         </C.RelatoContent>
