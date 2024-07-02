@@ -14,7 +14,7 @@ interface FirstStepTextProps {
   onNextClick?: (data: {
     nome: string;
     email: string;
-    telefone: string;
+    telefone?: string;
   }) => void;
 }
 
@@ -39,9 +39,6 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
     }
     if (!email) {
       newErrors.push('E-mail é obrigatório');
-    }
-    if (!telefone) {
-      newErrors.push('Telefone é obrigatório');
     }
 
     if (newErrors.length > 0) {
@@ -133,7 +130,7 @@ const FirstStepText: React.FC<FirstStepTextProps> = ({
             onFocus={() => onFocusInput('email', email)}
           />
           <C.Input
-            placeholder="Telefone"
+            placeholder="Telefone (opcional)"
             value={telefone}
             onChange={(e) => onChangeInput(e, setTelefone)}
             onFocus={() => onFocusInput('telefone', telefone)}
