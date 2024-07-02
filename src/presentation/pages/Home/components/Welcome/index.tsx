@@ -73,9 +73,9 @@ const Welcome = () => {
             style={{
               fontWeight: '500',
             }}
-            title="Deixar Depoimento"
+            title="DEIXE SEU DEPOIMENTO"
           >
-            Deixar Depoimento
+            DEIXE SEU DEPOIMENTO
           </Button>
         </C.TextContainer>
       </C.WelcomeField>

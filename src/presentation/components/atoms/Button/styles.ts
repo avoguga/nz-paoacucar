@@ -19,4 +19,9 @@ export const Button = styled.button<ContainerProps>`
 
   align-items: center;
   justify-content: center;
+
+  :hover {
+    cursor: pointer;
+    background-color: rgba(220, 147, 39, 0.8);
+  }
 `;
