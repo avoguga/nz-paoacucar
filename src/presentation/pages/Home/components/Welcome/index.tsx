@@ -17,6 +17,8 @@ const Welcome = () => {
       const response = await axios.get(
         'https://gestormuseu.serradabarriga.app.br/depoimentos'
       );
+
+      console.log('Depoimentos:', response.data);
       const data = response.data.map((depoimento: any) => ({
         id: depoimento._id,
         type: depoimento.videoUrl ? 'video' : 'text',
