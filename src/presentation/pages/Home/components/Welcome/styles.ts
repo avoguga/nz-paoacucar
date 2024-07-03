@@ -41,3 +41,22 @@ export const Logo = styled.img`
   height: 330px;
   object-fit: contain;
 `;
+
+export const ArrowButton = styled.button`
+  background-color: #5b2913;
+  border: none;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute; /* Adjust as needed */
+  top: 150px; /* Adjust as needed */
+  left: 150px; /* Adjust as needed */
+
+  svg path {
+    fill: white;
+  }
+`;

@@ -6,6 +6,7 @@ import VideoCarousel, { CarouselItem } from '../VideoCarousel';
 import { useState, useEffect } from 'react';
 import GiveTestimonialModal from 'presentation/components/molecules/GiveTestimonialModal';
 import axios from 'axios';
+import { Icons } from 'main/helpers/functions/icons';
 
 const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,9 +76,9 @@ const Welcome = () => {
             style={{
               fontWeight: '500',
             }}
-            title="DEIXE SEU DEPOIMENTO"
+            title="Deixe seu depoimento"
           >
-            DEIXE SEU DEPOIMENTO
+            Deixe seu depoimento
           </Button>
         </C.TextContainer>
       </C.WelcomeField>
@@ -102,6 +103,14 @@ const Welcome = () => {
         Galeria de depoimentos
       </Button>{' '}
       <br /> <br />
+      <C.ArrowButton
+        onClick={() =>
+          (window.location.href =
+            'https://www.museupaodeacucar.dev.br/personalidades')
+        }
+      >
+        <Icons.SetaEsquerda />
+      </C.ArrowButton>
       <VideoCarousel items={items} />
       {isModalOpen && (
         <GiveTestimonialModal isOpen={isModalOpen} onClose={handleCloseModal} />
