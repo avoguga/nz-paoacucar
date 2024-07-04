@@ -72,6 +72,9 @@ export const Modal = ({
   const onChangeInput = (event, setState) => {
     const value = event.target.value;
     setState(value);
+    if (event.target.name === 'comment') {
+      setCharCount(value.length);
+    }
     keyboard.current.setInput(value);
   };
 
@@ -94,6 +97,7 @@ export const Modal = ({
           />
           <C.TextArea
             placeholder="Seu comentário"
+            name="comment"
             // @ts-ignore
             maxLength="500"
             value={comment}
