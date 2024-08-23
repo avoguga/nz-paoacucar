@@ -26,6 +26,7 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const recordedVideoRef = useRef(null);
+  const [countdown, setCountdown] = useState<number | null>(null); // Novo state
 
   async function getCameraPermission() {
     if ('MediaRecorder' in window) {
@@ -80,20 +81,30 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
 
   const startRecording = () => {
     if (stream && recordingStatus === 'inactive') {
-      setRecordingStatus('recording');
-      const options = { mimeType, videoBitsPerSecond: 2500000 }; // Reduzir a taxa de bits do vídeo
-      const media = new MediaRecorder(stream, options);
-      mediaRecorder.current = media;
-      mediaRecorder.current.start();
-      const localVideoChunks = [];
-      mediaRecorder.current.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          localVideoChunks.push(event.data);
-        }
-      };
-      setVideoChunks(localVideoChunks);
-      setRecordTime(0);
-      setProgress(0);
+      setCountdown(5); // Inicia a contagem regressiva de 5 segundos
+      const countdownInterval = setInterval(() => {
+        setCountdown((prevCountdown) => {
+          if (prevCountdown === 1) {
+            clearInterval(countdownInterval);
+            setRecordingStatus('recording');
+            const options = { mimeType, videoBitsPerSecond: 2500000 }; // Reduzir a taxa de bits do vídeo
+            const media = new MediaRecorder(stream, options);
+            mediaRecorder.current = media;
+            mediaRecorder.current.start();
+            const localVideoChunks = [];
+            mediaRecorder.current.ondataavailable = (event) => {
+              if (event.data.size > 0) {
+                localVideoChunks.push(event.data);
+              }
+            };
+            setVideoChunks(localVideoChunks);
+            setRecordTime(0);
+            setProgress(0);
+            return null;
+          }
+          return prevCountdown! - 1;
+        });
+      }, 1000);
     }
   };
 
@@ -228,6 +239,11 @@ const VideoRecorder = ({ onBackClick, onConfirm, onStop, onCancel }) => {
                 </C.ButtonContainer>
               </>
             )}
+          {countdown !== null && (
+            <C.ButtonContainer>
+              <C.Countdown>{countdown}</C.Countdown>
+            </C.ButtonContainer>
+          )}
           {recordingStatus === 'recording' && (
             <>
               <C.ButtonContainer>

@@ -109,6 +109,21 @@ export const PlayButton = styled.button`
   }
 `;
 
+export const Countdown = styled.div`
+  font-size: 80px;
+  color: #ffffff;
+  font-weight: bold;
+  position: absolute;
+  top: 20%;
+  width: 160px;
+  height: 160px;
+  text-align: center;
+  right: 35%;
+  background-color: #7a5c47;
+  padding: 35px 30px;
+  border-radius: 50%;
+`;
+
 export const LogoContainer = styled.div`
   position: absolute;
   top: 80px;
